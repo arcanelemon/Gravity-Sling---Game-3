@@ -1,0 +1,147 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.InputSystem;
+
+public class MainMenu : MonoBehaviour
+{
+    #region Variables
+
+    [SerializeField]
+    GameObject introContainer;
+
+    [SerializeField]
+    GameObject menuContainer;
+
+    [SerializeField]
+    GameObject PlayMenu;
+
+    [SerializeField]
+    GameObject HelpMenu;
+
+    [SerializeField]
+    GameObject SettingsMenu;
+    
+    [SerializeField]
+    InputActionAsset inputActions;
+
+    InputAction enterAction;
+
+    InputAction nextAction;
+
+    InputAction prevAction;
+
+    bool started;
+
+    int currId;
+
+    #endregion Variables
+    
+    #region Engine
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        var inputMap = inputActions.FindActionMap("UI");
+        enterAction = inputMap.FindAction("Start");
+        enterAction.performed += OnEnterPress;
+        enterAction.Enable();
+        nextAction = inputMap.FindAction("Next");
+        nextAction.performed += _ => NextTab();
+        nextAction.Enable();
+        prevAction = inputMap.FindAction("Previous");
+        prevAction.performed += _ => PreviousTab();
+        prevAction.Enable();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+
+    private void OnDestroy()
+    {
+        enterAction.Disable();
+        enterAction.Dispose();
+        nextAction.Disable();
+        nextAction.Dispose();
+        prevAction.Disable();
+        prevAction.Dispose();
+    }
+
+    #endregion Engine
+
+    #region Private Methods
+
+    void OnEnterPress(InputAction.CallbackContext context) 
+    {
+        if (!started) 
+        {
+            EnterGame();
+        }
+    }
+
+    #endregion Private Methods
+
+    #region Public Methods
+
+    public void EnterGame() 
+    {
+        introContainer.SetActive(false);
+        menuContainer.SetActive(true);
+        SetTab(currId);
+        PlayMenu.GetComponent<PlayManager>().SetCollection(0);
+    }
+
+    public void SetTab(int id) 
+    {
+        GameObject activeTab = null;
+
+        PlayMenu.SetActive(false);
+        HelpMenu.SetActive(false);
+        SettingsMenu.SetActive(false);
+
+        switch (id) 
+        {
+            case 0:
+                activeTab = PlayMenu;
+                break;
+            case 1:
+                activeTab = HelpMenu;
+                break;
+            case 2:
+                activeTab = SettingsMenu;
+                break;
+        }
+
+        activeTab.SetActive(true);
+    }
+
+    public void NextTab() 
+    {
+        currId++;
+
+        if (currId > 2)
+            currId = 0;
+
+        SetTab(currId);
+    }
+
+    public void PreviousTab() 
+    {
+        currId--;
+
+        if (currId < 0)
+            currId = 2;
+
+        SetTab(currId);
+    }
+
+    public void Quit() 
+    {
+        Application.Quit();
+    }
+
+    #endregion Public Methods
+}
