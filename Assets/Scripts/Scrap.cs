@@ -27,7 +27,9 @@ public class Scrap : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         TriggerAction();
+        AudioManager.instance.Play("Scrap_Pickup");
         Destroy(gameObject);
+        
     }
 
     #endregion Engine

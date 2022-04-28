@@ -212,6 +212,7 @@ public class PlayerController : MonoBehaviour
         if (grounded)
         {
             // default jump
+            AudioManager.instance.Play("Jump");
             rigibody.AddForce((transform.up + transform.right * moveInputs.x).normalized * jumpForce, ForceMode2D.Impulse);
             StartCoroutine(YieldGravity());
         }
