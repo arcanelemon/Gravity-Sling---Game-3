@@ -204,7 +204,7 @@ public class PlayerController : MonoBehaviour
     void Move()
     {
         if (grounded)
-            transform.position = Vector3.ProjectOnPlane(transform.position + transform.right * moveSpeed * moveInputs.x, normal);
+            transform.position = transform.position + transform.right * moveSpeed * moveInputs.x; //Vector3.ProjectOnPlane(transform.position + transform.right * moveSpeed * moveInputs.x, normal);
     }
 
     void Jump()
@@ -235,7 +235,7 @@ public class PlayerController : MonoBehaviour
             float temp = 1e6f;
             Vector3 direction = currentBody == null ? Vector3.zero : (currentBody.transform.position - transform.position).normalized;
 
-            if (!grounded)
+            if (true)//!grounded)
             {
                 foreach (GameObject gravityBody in gravityBodies)
                 {
