@@ -65,6 +65,8 @@ public class GameManager : MonoBehaviour
 
         Time.timeScale = 1;
 
+        AudioManager.instance.Play("Background_music_2");
+
     }
 
     // Update is called once per frame
@@ -72,6 +74,11 @@ public class GameManager : MonoBehaviour
     {
         time -= Time.deltaTime;
         FormatTimer();
+
+        if(time <= 1.5)
+        {
+            AudioManager.instance.Play("Time_Up");
+        }
 
         if (time <= 0)
             ResetGame();

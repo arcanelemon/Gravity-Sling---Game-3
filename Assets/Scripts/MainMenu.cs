@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+using System;
+using UnityEngine.Audio;
 public class MainMenu : MonoBehaviour
 {
     #region Variables
@@ -35,6 +37,8 @@ public class MainMenu : MonoBehaviour
 
     int currId;
 
+    public static MainMenu instance;
+
     #endregion Variables
     
     #region Engine
@@ -52,6 +56,9 @@ public class MainMenu : MonoBehaviour
         prevAction = inputMap.FindAction("Previous");
         prevAction.performed += _ => PreviousTab();
         prevAction.Enable();
+
+        AudioManager.instance.Play("MainMenu");
+
     }
 
     // Update is called once per frame

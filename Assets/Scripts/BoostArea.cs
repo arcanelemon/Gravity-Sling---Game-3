@@ -17,6 +17,7 @@ public class BoostArea : MonoBehaviour
     {
         if (collision.tag is "Player") 
         {
+            AudioManager.instance.Play("Boost");
             Debug.Log("Hit");
             Rigidbody2D rigidbody = collision.GetComponent<Rigidbody2D>();
             rigidbody.velocity = Vector2.zero;
