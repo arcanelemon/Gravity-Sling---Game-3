@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Gravity Body
+  - End
   layers:
   - Default
   - TransparentFX

@@ -33,6 +33,10 @@ public class MainMenu : MonoBehaviour
 
     InputAction prevAction;
 
+    PlayerData playerData;
+
+    SettingsManager settingsManager;
+
     bool started;
 
     int currId;
@@ -44,7 +48,7 @@ public class MainMenu : MonoBehaviour
     #region Engine
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         var inputMap = inputActions.FindActionMap("UI");
         enterAction = inputMap.FindAction("Start");
@@ -57,7 +61,9 @@ public class MainMenu : MonoBehaviour
         prevAction.performed += _ => PreviousTab();
         prevAction.Enable();
 
-        AudioManager.instance.Play("MainMenu");
+        playerData = SaveManager.LoadPlayerData();
+        settingsManager = SettingsMenu.GetComponent<SettingsManager>();
+        //AudioManager.instance.Play("MainMenu");
 
     }
 
@@ -103,8 +109,6 @@ public class MainMenu : MonoBehaviour
 
     public void SetTab(int id) 
     {
-        GameObject activeTab = null;
-
         PlayMenu.SetActive(false);
         HelpMenu.SetActive(false);
         SettingsMenu.SetActive(false);
@@ -112,17 +116,16 @@ public class MainMenu : MonoBehaviour
         switch (id) 
         {
             case 0:
-                activeTab = PlayMenu;
+                PlayMenu.SetActive(true);
                 break;
             case 1:
-                activeTab = HelpMenu;
+                HelpMenu.SetActive(true);
                 break;
             case 2:
-                activeTab = SettingsMenu;
+                SettingsMenu.SetActive(true);
+                settingsManager.PopulateSettings();
                 break;
         }
-
-        activeTab.SetActive(true);
     }
 
     public void NextTab() 

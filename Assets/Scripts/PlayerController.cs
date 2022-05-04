@@ -40,6 +40,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     float gravityMin;
 
+    [SerializeField]
+    bool showHelp;
+
     bool useGravity = true;
 
     bool grounded;
@@ -60,9 +63,19 @@ public class PlayerController : MonoBehaviour
 
     GameObject currentBody;
 
+    GameObject secondaryBody;
+
     GameObject[] gravityBodies;
 
     FollowCam cam;
+
+    WarpGate warpGate;
+
+    RadialIndicator helpRadialIndicator;
+
+    RadialIndicator attract1RadialIndicator;
+
+    RadialIndicator attract2RadialIndicator;
 
     #endregion Variables
 
@@ -160,6 +173,17 @@ public class PlayerController : MonoBehaviour
         rigibody = GetComponent<Rigidbody2D>();
         cam = GameObject.FindObjectOfType<FollowCam>();
         gravityBodies = GameObject.FindGameObjectsWithTag("Gravity Body");
+
+        if (showHelp)
+        {
+            warpGate = GameObject.FindGameObjectWithTag("End").GetComponent<WarpGate>();
+            helpRadialIndicator = UIManager.instance.CreateRadialIndicator(RadialIndicator.Type.Help);
+        }
+    }
+
+     void Update()
+    {
+        UpdateRadialIcons();
     }
 
     // Update is called once per frame
@@ -249,6 +273,18 @@ public class PlayerController : MonoBehaviour
                     }
                 }
 
+                foreach (GameObject gravityBody in gravityBodies)
+                {
+                    float distance = Vector2.Distance(transform.position, gravityBody.transform.position)
+                        - gravityBody.GetComponent<SpriteRenderer>().bounds.size.x / 2;
+
+                    if (distance < temp)
+                    {
+                        temp = distance;
+                        secondaryBody = gravityBody;
+                    }
+                }
+
                 // Pull towards
                 rigibody.AddForce(direction * Mathf.Clamp(attract ? attractForce : gravityConst / temp, gravityMin, Mathf.Infinity));
                 rigibody.velocity = Vector3.ClampMagnitude(rigibody.velocity, maxVelocity);
@@ -288,6 +324,29 @@ public class PlayerController : MonoBehaviour
         useGravity = false;
         yield return new WaitForSeconds(0.2f);
         useGravity = true;
+    }
+
+    void UpdateRadialIcons() 
+    {
+        if (showHelp) 
+        {
+            if (warpGate.Visible && helpRadialIndicator.Visible)
+                helpRadialIndicator.SetVisibility(false);
+            else if (!warpGate.Visible && !helpRadialIndicator.Visible)
+                helpRadialIndicator.SetVisibility(true);
+
+            helpRadialIndicator.SetAngle(Vector2.SignedAngle(Vector2.up, (warpGate.transform.position - transform.position).normalized));
+        }
+
+        if (attract1RadialIndicator != null) 
+        {
+                
+        }
+
+        if (attract2RadialIndicator != null) 
+        {
+            
+        }
     }
 
     #endregion Private Methods

@@ -38,7 +38,9 @@ public class GameManager : MonoBehaviour
 
     float time;
 
-    float totalScrap;
+    int totalScrap;
+
+    int scrapBank;
 
     IEnumerator slowTimeCoroutine;
 
@@ -65,8 +67,10 @@ public class GameManager : MonoBehaviour
 
         Time.timeScale = 1;
 
+        PlayerData data = SaveManager.LoadPlayerData();
+        if (data != null)
+            scrapBank = data.scraps;
         AudioManager.instance.Play("Background_music_2");
-
     }
 
     // Update is called once per frame
@@ -152,6 +156,7 @@ public class GameManager : MonoBehaviour
         }
 
         Time.timeScale = 1;
+        SaveManager.SavePlayerData(new PlayerData(totalScrap + scrapBank));
         SceneManager.LoadScene("Main Menu");
     }
 

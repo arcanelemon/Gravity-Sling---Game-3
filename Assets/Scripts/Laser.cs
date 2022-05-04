@@ -7,18 +7,23 @@ public class Laser : MonoBehaviour
     #region Variables
 
     [SerializeField]
-    float range;
-
-    [Space(10)]
+    bool playOnAwake;
 
     [SerializeField]
-    float warmTime;
+    float delay;
+
+    [SerializeField]
+    bool randomDelay;
+
+    [Space(10)]
 
     [SerializeField]
     float fireTime;
 
     [SerializeField]
     Vector2 waitTime;
+
+    Animator animator;
 
     #endregion Variables
     
@@ -30,15 +35,35 @@ public class Laser : MonoBehaviour
         
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     #endregion Engine
 
     #region Private Methods
+
+    //IEnumerator YieldStartTime() 
+    //{
+        
+    //    yield return new WaitForSeconds()
+    //}
+
+    //IEnumerator YieldFireTime() 
+    //{
+    
+    //}
+
+    //IEnumerator YieldWaitTime() 
+    //{
+    
+    //}
+
+    private void FireLaser() 
+    {
+        animator.SetBool("Fire", true);
+    }
+
+    private void ResetLaser()
+    {
+        animator.SetBool("Fire", false);
+    }
 
     #endregion Private Methods
 
