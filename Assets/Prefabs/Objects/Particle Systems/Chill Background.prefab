@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8389414415293322456}
   - component: {fileID: 8389414415293322457}
   m_Layer: 0
-  m_Name: Background
+  m_Name: Chill Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

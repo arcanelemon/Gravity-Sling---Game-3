@@ -6,7 +6,7 @@ using TMPro;
 using UnityEditor;
 
 [CustomEditor(typeof(PlanetButton))]
-public class PlanetButton : Button, 
+public class PlanetButton : Button
 {
     #region Variables
 
@@ -28,14 +28,14 @@ public class PlanetButton : Button,
         manager = FindObjectOfType<PlayManager>();
     }
 
-    public override void OnInspectorGUI()
-    {
-        MenuButton targetMenuButton = (MenuButton)target;
+    //public override void OnInspectorGUI()
+    //{
+    //    MenuButton targetMenuButton = (MenuButton)target;
 
-        targetMenuButton.acceptsPointerInput = EditorGUILayout.Toggle("Accepts pointer input", targetMenuButton.acceptsPointerInput);
+    //    targetMenuButton.acceptsPointerInput = EditorGUILayout.Toggle("Accepts pointer input", targetMenuButton.acceptsPointerInput);
 
-        base.OnInspectorGUI;
-    }
+    //    base.OnInspectorGUI;
+    //}
 
     #endregion Private Methods
 
