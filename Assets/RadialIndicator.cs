@@ -25,7 +25,7 @@ public class RadialIndicator : MonoBehaviour
         Attract2
     }
 
-    private void Start()
+    private void Awake()
     {
         group = GetComponent<CanvasGroup>();
     }

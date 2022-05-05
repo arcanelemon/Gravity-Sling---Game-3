@@ -2,10 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SystemCollection : MonoBehaviour
+[CreateAssetMenu(fileName = "New Planet System", menuName = "Data/PlanetSystem")]
+public class PlanetSystemData : ScriptableObject
 {
-    #region Variables
-
     [SerializeField]
     string systemName;
     public string SystemName => systemName;
@@ -14,5 +13,7 @@ public class SystemCollection : MonoBehaviour
     int scrapRequirement;
     public int ScrapRequirement => scrapRequirement;
 
-    #endregion Variables
+    [SerializeField]
+    PlanetData[] planets;
+    public PlanetData[] Planets => planets;
 }

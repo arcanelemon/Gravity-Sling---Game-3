@@ -12,13 +12,13 @@ public class Laser : MonoBehaviour
     [SerializeField]
     float delay;
 
-    [SerializeField]
-    bool randomDelay;
-
     [Space(10)]
 
     [SerializeField]
     float fireTime;
+
+    [SerializeField]
+    float warmTime;
 
     [SerializeField]
     Vector2 waitTime;
@@ -32,37 +32,69 @@ public class Laser : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        animator = GetComponent<Animator>();
+
+        if (playOnAwake) 
+        {
+            StartCoroutine(YieldStartTime());
+        } else 
+        {
+            StartCoroutine(YieldWaitTime());
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag is "Player")
+            GameManager.instance.ResetGame();
     }
 
     #endregion Engine
 
     #region Private Methods
 
-    //IEnumerator YieldStartTime() 
-    //{
-        
-    //    yield return new WaitForSeconds()
-    //}
+    IEnumerator YieldStartTime()
+    {
+        yield return new WaitForSeconds(delay);
+        WarmLaser();
+    }
 
-    //IEnumerator YieldFireTime() 
-    //{
-    
-    //}
+    IEnumerator YieldFireTime()
+    {
+        yield return new WaitForSeconds(fireTime);
+        ResetLaser();
+    }
 
-    //IEnumerator YieldWaitTime() 
-    //{
-    
-    //}
+    IEnumerator YieldWaitTime()
+    {
+        yield return new WaitForSeconds(Random.Range(waitTime.x, waitTime.y));
+        WarmLaser();
+    }
+
+    IEnumerator YieldWarmTime()
+    {
+        yield return new WaitForSeconds(warmTime);
+        FireLaser();
+    }
+
+    private void WarmLaser() 
+    {
+        animator.SetBool("Warm", true);
+        StartCoroutine(YieldWarmTime());
+    }
 
     private void FireLaser() 
     {
+        animator.SetBool("Warm", false);
         animator.SetBool("Fire", true);
+
+        StartCoroutine(YieldFireTime());
     }
 
     private void ResetLaser()
     {
         animator.SetBool("Fire", false);
+        StartCoroutine(YieldWaitTime());
     }
 
     #endregion Private Methods

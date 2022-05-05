@@ -16,7 +16,10 @@ public class PlayManager : MonoBehaviour
     Button prevButton;
 
     [SerializeField]
-    SystemCollection[] systemCollections;
+    PlanetSystemData[] planetSystems;
+
+    [SerializeField]
+    PlanetButton[] planetButtons;
 
     [SerializeField]
     TextMeshProUGUI scrapRequirementUGUI;
@@ -26,7 +29,7 @@ public class PlayManager : MonoBehaviour
 
     int index;
 
-    int totalScraps = 480;
+    PlayerData data = null;
 
     #endregion Variables
     
@@ -35,13 +38,8 @@ public class PlayManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // Check if new system unlocked
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        data = SaveManager.LoadPlayerData();
+        SetCollection(0);
     }
 
     #endregion Engine
@@ -64,7 +62,7 @@ public class PlayManager : MonoBehaviour
 
     public void SetCollection(int id) 
     {
-        if (index == systemCollections.Length - 1)
+        if (index == planetSystems.Length - 1)
             nextButton.interactable = false;
         else if (index == 0)
             prevButton.interactable = false;
@@ -74,16 +72,21 @@ public class PlayManager : MonoBehaviour
             prevButton.interactable = true;
         }
 
-        foreach (SystemCollection collection in systemCollections)
+        int i = 0;
+        foreach (PlanetData planet in planetSystems[id].Planets)
         {
-            collection.gameObject.SetActive(false);
+            // set button to planet sprite and target=
+            planetButtons[i].UpdateButton(planet);
 
+
+            // see if prevous planet has been played
+
+            i++;
         }
 
-        systemCollections[id].gameObject.SetActive(true);
-        systemNameUGUI.text = systemCollections[id].SystemName.ToUpper();
+        systemNameUGUI.text = planetSystems[id].SystemName.ToUpper();
 
-        int scrapRequirement = systemCollections[id].ScrapRequirement - totalScraps;
+        int scrapRequirement = planetSystems[id].ScrapRequirement - (data == null ? 0 : data.scraps);
 
         if (scrapRequirement > 0)
         {

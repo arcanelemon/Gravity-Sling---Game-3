@@ -10,7 +10,7 @@ public class SettingsManager : MonoBehaviour
     #region Engine
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         // only return top children
         children = GetComponentsInChildren<Transform>();

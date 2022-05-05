@@ -57,7 +57,7 @@ public class PlayerController : MonoBehaviour
 
     Vector2 moveInputs;
 
-    Vector2 normal;
+    Vector3 oldNormal;
 
     Rigidbody2D rigibody;
 
@@ -114,7 +114,7 @@ public class PlayerController : MonoBehaviour
     
     void OnAttractRelease(InputAction.CallbackContext context)
     {
-        if (attract)
+        if (attract && currentBody != null)
         {
             Vector3 direction = (currentBody.transform.position - transform.position).normalized;
             rigibody.AddForce(-direction * attractForce);
@@ -219,6 +219,7 @@ public class PlayerController : MonoBehaviour
         attractAction.Dispose();
         pauseAction.Dispose();
         zoomAction.Dispose();
+        attractAction.Dispose();
     }
 
     #endregion Engine
@@ -227,8 +228,13 @@ public class PlayerController : MonoBehaviour
 
     void Move()
     {
-        if (grounded)
-            transform.position = transform.position + transform.right * moveSpeed * moveInputs.x; //Vector3.ProjectOnPlane(transform.position + transform.right * moveSpeed * moveInputs.x, normal);
+        if (grounded) 
+        {
+            Vector3 currentVelocity = rigibody.velocity;
+            Vector3 targetVelocity = (transform.right * moveInputs.x * moveSpeed);// + (-oldNormal.normalized);
+            rigibody.velocity = targetVelocity;
+            //rigibody.MovePosition(transform.position + (transform.right * moveInputs.x * moveSpeed) + (-oldNormal.normalized));
+        }
     }
 
     void Jump()
@@ -259,42 +265,41 @@ public class PlayerController : MonoBehaviour
             float temp = 1e6f;
             Vector3 direction = currentBody == null ? Vector3.zero : (currentBody.transform.position - transform.position).normalized;
 
-            if (true)//!grounded)
+            foreach (GameObject gravityBody in gravityBodies)
             {
-                foreach (GameObject gravityBody in gravityBodies)
+                float distance = Vector2.Distance(transform.position, gravityBody.transform.position)
+                    - gravityBody.GetComponent<SpriteRenderer>().bounds.size.x / 2;
+
+                if (distance < temp)
                 {
-                    float distance = Vector2.Distance(transform.position, gravityBody.transform.position)
-                        - gravityBody.GetComponent<SpriteRenderer>().bounds.size.x / 2;
-
-                    if (distance < temp)
-                    {
-                        temp = distance;
-                        currentBody = gravityBody;
-                    }
+                    temp = distance;
+                    currentBody = gravityBody;
                 }
-
-                foreach (GameObject gravityBody in gravityBodies)
-                {
-                    float distance = Vector2.Distance(transform.position, gravityBody.transform.position)
-                        - gravityBody.GetComponent<SpriteRenderer>().bounds.size.x / 2;
-
-                    if (distance < temp)
-                    {
-                        temp = distance;
-                        secondaryBody = gravityBody;
-                    }
-                }
-
-                // Pull towards
-                rigibody.AddForce(direction * Mathf.Clamp(attract ? attractForce : gravityConst / temp, gravityMin, Mathf.Infinity));
-                rigibody.velocity = Vector3.ClampMagnitude(rigibody.velocity, maxVelocity);
             }
 
+            foreach (GameObject gravityBody in gravityBodies)
+            {
+                float distance = Vector2.Distance(transform.position, gravityBody.transform.position)
+                    - gravityBody.GetComponent<SpriteRenderer>().bounds.size.x / 2;
+
+                if (distance < temp)
+                {
+                    temp = distance;
+                    secondaryBody = gravityBody;
+                }
+            }
+
+            // Pull towards
+            rigibody.AddForce( direction * Mathf.Clamp(attract ? attractForce : gravityConst / temp, gravityMin, Mathf.Infinity));
+            rigibody.velocity = Vector3.ClampMagnitude(rigibody.velocity, maxVelocity);
+
             // Rotate
-            if (grounded || attract || temp < rotateDistance)
+            if (attract || (temp < rotateDistance && !grounded))
             {
                 Quaternion slopeRotation = Quaternion.FromToRotation(transform.up, -direction);
-                transform.rotation = Quaternion.Lerp(transform.rotation, slopeRotation * transform.rotation, rotateSpeed * Time.fixedDeltaTime);
+                Quaternion targetRotation = Quaternion.Lerp(transform.rotation, slopeRotation * transform.rotation, rotateSpeed * Time.fixedDeltaTime);
+                if (Mathf.Abs(transform.rotation.z - targetRotation.z) > .001f)
+                    transform.rotation = targetRotation;
             }
         }
     }
@@ -303,20 +308,27 @@ public class PlayerController : MonoBehaviour
     {
 
         RaycastHit2D hit = Physics2D.Raycast(transform.position, -transform.up, groundCheckDistance, LayerMask.GetMask("Ground"));
-        if (!grounded && hit.collider != null)
+        if (hit.collider != null)
         {
+            //if the current goTransform.up.y value has passed the threshold test  
+            if (oldNormal.y >= transform.up.y + .009f || oldNormal.y <= transform.up.y - .009f)
+            {
+                //set the up vector to match the normal of the ray's collision  
+                transform.up = hit.normal;
+            }
+
+            //store the current hit.normal inside the oldNormal  
+            oldNormal = hit.normal;
 
             attract = false;
             grounded = true;
             canBoost = true;
-            normal = hit.normal;
-        } else if (hit.collider == null)
+        } else
         {
             grounded = false;
         }
 
-        if (hit.point != Vector2.zero)
-            Debug.DrawLine(transform.position, hit.point, Color.blue, 0.1f);
+        Debug.DrawRay(transform.position, -transform.up * groundCheckDistance, Color.blue, 0.1f);
     }
 
     IEnumerator YieldGravity() 
@@ -328,7 +340,7 @@ public class PlayerController : MonoBehaviour
 
     void UpdateRadialIcons() 
     {
-        if (showHelp) 
+        if (showHelp && helpRadialIndicator != null) 
         {
             if (warpGate.Visible && helpRadialIndicator.Visible)
                 helpRadialIndicator.SetVisibility(false);

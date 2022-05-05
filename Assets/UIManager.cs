@@ -17,7 +17,7 @@ public class UIManager : MonoBehaviour
     #region Engine
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         if (instance != null)
             Destroy(this.gameObject);
