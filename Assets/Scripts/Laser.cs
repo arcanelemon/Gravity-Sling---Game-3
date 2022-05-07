@@ -43,12 +43,6 @@ public class Laser : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.tag is "Player")
-            GameManager.instance.ResetGame();
-    }
-
     #endregion Engine
 
     #region Private Methods

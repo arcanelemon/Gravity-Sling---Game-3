@@ -5,16 +5,16 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEditor;
 
-[CustomEditor(typeof(PlanetButton))]
+
 public class PlanetButton : Button
 {
     #region Variables
 
     [SerializeField]
-    Image image;
+    public Image image;
 
     [SerializeField]
-    TextMeshProUGUI textUGUI;
+    public TextMeshProUGUI textUGUI;
 
     PlayManager manager;
 
@@ -28,20 +28,11 @@ public class PlanetButton : Button
         manager = FindObjectOfType<PlayManager>();
     }
 
-    //public override void OnInspectorGUI()
-    //{
-    //    MenuButton targetMenuButton = (MenuButton)target;
+        #endregion Private Methods
 
-    //    targetMenuButton.acceptsPointerInput = EditorGUILayout.Toggle("Accepts pointer input", targetMenuButton.acceptsPointerInput);
+        #region Public Methods
 
-    //    base.OnInspectorGUI;
-    //}
-
-    #endregion Private Methods
-
-    #region Public Methods
-
-    public void UpdateButton(PlanetData data) 
+        public void UpdateButton(PlanetData data) 
     {
         onClick.RemoveAllListeners();
         onClick.AddListener(delegate { manager.LoadLevel(data.Name); });

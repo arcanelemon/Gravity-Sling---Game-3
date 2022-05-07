@@ -65,6 +65,8 @@ public class PlayerController : MonoBehaviour
 
     GameObject secondaryBody;
 
+    GameObject attractBody;
+
     GameObject[] gravityBodies;
 
     FollowCam cam;
@@ -88,7 +90,9 @@ public class PlayerController : MonoBehaviour
 
     InputAction jumpAction;
 
-    InputAction attractAction;
+    InputAction attract1Action;
+
+    InputAction attract2Action;
 
     InputAction pauseAction;
 
@@ -104,19 +108,40 @@ public class PlayerController : MonoBehaviour
         cueJump = true;
     }
 
-    void OnAttractPress(InputAction.CallbackContext context)
+    void OnAttract1Press(InputAction.CallbackContext context)
     {
         if (!grounded)
         {
             attract = true;
+            attractBody = currentBody;
         }
     }
     
-    void OnAttractRelease(InputAction.CallbackContext context)
+    void OnAttract1Release(InputAction.CallbackContext context)
     {
         if (attract && currentBody != null)
         {
             Vector3 direction = (currentBody.transform.position - transform.position).normalized;
+            rigibody.AddForce(-direction * attractForce);
+
+            attract = false;
+        }
+    }
+    
+    void OnAttract2Press(InputAction.CallbackContext context)
+    {
+        if (!grounded)
+        {
+            attract = true;
+            attractBody = secondaryBody;
+        }
+    }
+    
+    void OnAttract2Release(InputAction.CallbackContext context)
+    {
+        if (attract && secondaryBody != null)
+        {
+            Vector3 direction = (secondaryBody.transform.position - transform.position).normalized;
             rigibody.AddForce(-direction * attractForce);
 
             attract = false;
@@ -155,15 +180,18 @@ public class PlayerController : MonoBehaviour
         var inputMap = inputActions.FindActionMap("Player");
         moveAction = inputMap.FindAction("Move");
         jumpAction = inputMap.FindAction("Jump");
-        attractAction = inputMap.FindAction("Attract"); 
+        attract1Action = inputMap.FindAction("Attract1"); 
+        attract2Action = inputMap.FindAction("Attract2"); 
         pauseAction = inputMap.FindAction("Pause");
         zoomAction = inputMap.FindAction("Zoom");
 
         moveAction.performed += OnMoveChange;
         moveAction.canceled += OnMoveChange;
         jumpAction.performed += OnJumpPress;
-        attractAction.performed += OnAttractPress;
-        attractAction.canceled += OnAttractRelease;
+        attract1Action.performed += OnAttract1Press;
+        attract1Action.canceled += OnAttract1Release;
+        attract2Action.performed += OnAttract2Press;
+        attract2Action.canceled += OnAttract2Release;
         pauseAction.performed += OnPausePress;
         zoomAction.performed += OnZoomPress;
         zoomAction.canceled += OnZoomRelease;
@@ -179,6 +207,9 @@ public class PlayerController : MonoBehaviour
             warpGate = GameObject.FindGameObjectWithTag("End").GetComponent<WarpGate>();
             helpRadialIndicator = UIManager.instance.CreateRadialIndicator(RadialIndicator.Type.Help);
         }
+
+        attract1RadialIndicator = UIManager.instance.CreateRadialIndicator(RadialIndicator.Type.Attract1);
+        attract2RadialIndicator = UIManager.instance.CreateRadialIndicator(RadialIndicator.Type.Attract2);
     }
 
      void Update()
@@ -216,10 +247,10 @@ public class PlayerController : MonoBehaviour
 
         // Unassign inputmoveAction
         jumpAction.Dispose();
-        attractAction.Dispose();
+        attract1Action.Dispose();
         pauseAction.Dispose();
         zoomAction.Dispose();
-        attractAction.Dispose();
+        attract2Action.Dispose();
     }
 
     #endregion Engine
@@ -228,12 +259,9 @@ public class PlayerController : MonoBehaviour
 
     void Move()
     {
-        if (grounded) 
+        if (grounded)
         {
-            Vector3 currentVelocity = rigibody.velocity;
-            Vector3 targetVelocity = (transform.right * moveInputs.x * moveSpeed);// + (-oldNormal.normalized);
-            rigibody.velocity = targetVelocity;
-            //rigibody.MovePosition(transform.position + (transform.right * moveInputs.x * moveSpeed) + (-oldNormal.normalized));
+            transform.position = transform.position + transform.right * moveInputs.x * moveSpeed * Time.deltaTime;
         }
     }
 
@@ -243,7 +271,7 @@ public class PlayerController : MonoBehaviour
         {
             // default jump
             AudioManager.instance.Play("Jump");
-            rigibody.AddForce((transform.up + transform.right * moveInputs.x).normalized * jumpForce, ForceMode2D.Impulse);
+            rigibody.AddForce((2*transform.up + transform.right * moveInputs.x).normalized * jumpForce, ForceMode2D.Impulse);
             StartCoroutine(YieldGravity());
         }
         else if (canBoost)
@@ -277,20 +305,27 @@ public class PlayerController : MonoBehaviour
                 }
             }
 
+            temp = 1e6f;
             foreach (GameObject gravityBody in gravityBodies)
             {
                 float distance = Vector2.Distance(transform.position, gravityBody.transform.position)
                     - gravityBody.GetComponent<SpriteRenderer>().bounds.size.x / 2;
 
-                if (distance < temp)
+                if (distance < temp && gravityBody != currentBody)
                 {
                     temp = distance;
                     secondaryBody = gravityBody;
                 }
             }
 
+            if(attract && Vector2.Distance(transform.position, attractBody.transform.position) > attractDistance) 
+            {
+                attractBody = null;
+                attract = false;
+            }
+
             // Pull towards
-            rigibody.AddForce( direction * Mathf.Clamp(attract ? attractForce : gravityConst / temp, gravityMin, Mathf.Infinity));
+            rigibody.AddForce( attract ? ((attractBody.transform.position - transform.position).normalized * attractForce ) : (direction * Mathf.Clamp(gravityConst / temp, gravityMin, Mathf.Infinity)));
             rigibody.velocity = Vector3.ClampMagnitude(rigibody.velocity, maxVelocity);
 
             // Rotate
@@ -298,8 +333,11 @@ public class PlayerController : MonoBehaviour
             {
                 Quaternion slopeRotation = Quaternion.FromToRotation(transform.up, -direction);
                 Quaternion targetRotation = Quaternion.Lerp(transform.rotation, slopeRotation * transform.rotation, rotateSpeed * Time.fixedDeltaTime);
-                if (Mathf.Abs(transform.rotation.z - targetRotation.z) > .001f)
+                if (Mathf.Abs(transform.rotation.z - targetRotation.z) > .001f) 
+                {
                     transform.rotation = targetRotation;
+                    //transform.rotation = Quaternion.Euler(0f, 0f, transform.rotation.z);
+                }
             }
         }
     }
@@ -350,14 +388,32 @@ public class PlayerController : MonoBehaviour
             helpRadialIndicator.SetAngle(Vector2.SignedAngle(Vector2.up, (warpGate.transform.position - transform.position).normalized));
         }
 
-        if (attract1RadialIndicator != null) 
+        if (currentBody != null) 
         {
-                
+            attract1RadialIndicator.SetAngle(Vector2.SignedAngle(Vector2.up, (currentBody.transform.position - transform.position).normalized));
+
+            if (attract1RadialIndicator.Visible && (Vector2.Distance(currentBody.transform.position, transform.position) > attractDistance || grounded))
+            {
+                attract1RadialIndicator.SetVisibility(false);
+            }
+            else if (!attract1RadialIndicator.Visible && (Vector2.Distance(currentBody.transform.position, transform.position) < attractDistance && !grounded))
+            {
+                attract1RadialIndicator.SetVisibility(true);
+            }
         }
 
-        if (attract2RadialIndicator != null) 
+        if (secondaryBody != null) 
         {
-            
+            attract2RadialIndicator.SetAngle(Vector2.SignedAngle(Vector2.up, (secondaryBody.transform.position - transform.position).normalized));
+
+
+            if (attract2RadialIndicator.Visible && (Vector2.Distance(secondaryBody.transform.position, transform.position) > attractDistance || grounded))
+            {
+                attract2RadialIndicator.SetVisibility(false);
+            } else if (!attract2RadialIndicator.Visible && (Vector2.Distance(secondaryBody.transform.position, transform.position) < attractDistance && !grounded)) 
+            {
+                attract2RadialIndicator.SetVisibility(true);
+            }
         }
     }
 
@@ -369,7 +425,8 @@ public class PlayerController : MonoBehaviour
     {
         moveAction.Enable();
         jumpAction.Enable();
-        attractAction.Enable();
+        attract1Action.Enable();
+        attract2Action.Enable();
         pauseAction.Enable();
         zoomAction.Enable();
     }
@@ -378,7 +435,8 @@ public class PlayerController : MonoBehaviour
     {
         moveAction.Disable();
         jumpAction.Disable();
-        attractAction.Disable();
+        attract1Action.Disable();
+        attract2Action.Disable();
         pauseAction.Disable();
         zoomAction.Disable();
     }
