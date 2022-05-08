@@ -40,6 +40,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     float gravityMin;
 
+    [SerializeField]
+    bool showHelp;
+
     bool useGravity = true;
 
     bool grounded;
@@ -54,15 +57,27 @@ public class PlayerController : MonoBehaviour
 
     Vector2 moveInputs;
 
-    Vector2 normal;
+    Vector3 oldNormal;
 
     Rigidbody2D rigibody;
 
     GameObject currentBody;
 
+    GameObject secondaryBody;
+
+    GameObject attractBody;
+
     GameObject[] gravityBodies;
 
     FollowCam cam;
+
+    WarpGate warpGate;
+
+    RadialIndicator helpRadialIndicator;
+
+    RadialIndicator attract1RadialIndicator;
+
+    RadialIndicator attract2RadialIndicator;
 
     #endregion Variables
 
@@ -75,7 +90,9 @@ public class PlayerController : MonoBehaviour
 
     InputAction jumpAction;
 
-    InputAction attractAction;
+    InputAction attract1Action;
+
+    InputAction attract2Action;
 
     InputAction pauseAction;
 
@@ -91,19 +108,40 @@ public class PlayerController : MonoBehaviour
         cueJump = true;
     }
 
-    void OnAttractPress(InputAction.CallbackContext context)
+    void OnAttract1Press(InputAction.CallbackContext context)
     {
         if (!grounded)
         {
             attract = true;
+            attractBody = currentBody;
         }
     }
     
-    void OnAttractRelease(InputAction.CallbackContext context)
+    void OnAttract1Release(InputAction.CallbackContext context)
     {
-        if (attract)
+        if (attract && currentBody != null)
         {
             Vector3 direction = (currentBody.transform.position - transform.position).normalized;
+            rigibody.AddForce(-direction * attractForce);
+
+            attract = false;
+        }
+    }
+    
+    void OnAttract2Press(InputAction.CallbackContext context)
+    {
+        if (!grounded)
+        {
+            attract = true;
+            attractBody = secondaryBody;
+        }
+    }
+    
+    void OnAttract2Release(InputAction.CallbackContext context)
+    {
+        if (attract && secondaryBody != null)
+        {
+            Vector3 direction = (secondaryBody.transform.position - transform.position).normalized;
             rigibody.AddForce(-direction * attractForce);
 
             attract = false;
@@ -142,15 +180,18 @@ public class PlayerController : MonoBehaviour
         var inputMap = inputActions.FindActionMap("Player");
         moveAction = inputMap.FindAction("Move");
         jumpAction = inputMap.FindAction("Jump");
-        attractAction = inputMap.FindAction("Attract"); 
+        attract1Action = inputMap.FindAction("Attract1"); 
+        attract2Action = inputMap.FindAction("Attract2"); 
         pauseAction = inputMap.FindAction("Pause");
         zoomAction = inputMap.FindAction("Zoom");
 
         moveAction.performed += OnMoveChange;
         moveAction.canceled += OnMoveChange;
         jumpAction.performed += OnJumpPress;
-        attractAction.performed += OnAttractPress;
-        attractAction.canceled += OnAttractRelease;
+        attract1Action.performed += OnAttract1Press;
+        attract1Action.canceled += OnAttract1Release;
+        attract2Action.performed += OnAttract2Press;
+        attract2Action.canceled += OnAttract2Release;
         pauseAction.performed += OnPausePress;
         zoomAction.performed += OnZoomPress;
         zoomAction.canceled += OnZoomRelease;
@@ -160,6 +201,20 @@ public class PlayerController : MonoBehaviour
         rigibody = GetComponent<Rigidbody2D>();
         cam = GameObject.FindObjectOfType<FollowCam>();
         gravityBodies = GameObject.FindGameObjectsWithTag("Gravity Body");
+
+        if (showHelp)
+        {
+            warpGate = GameObject.FindGameObjectWithTag("End").GetComponent<WarpGate>();
+            helpRadialIndicator = UIManager.instance.CreateRadialIndicator(RadialIndicator.Type.Help);
+        }
+
+        attract1RadialIndicator = UIManager.instance.CreateRadialIndicator(RadialIndicator.Type.Attract1);
+        attract2RadialIndicator = UIManager.instance.CreateRadialIndicator(RadialIndicator.Type.Attract2);
+    }
+
+     void Update()
+    {
+        UpdateRadialIcons();
     }
 
     // Update is called once per frame
@@ -177,11 +232,12 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Ground")) 
         {
+
+            rigibody.velocity = Vector3.zero;
             Vector3 direction = (currentBody.transform.position - transform.position).normalized;
             Quaternion slopeRotation = Quaternion.FromToRotation(transform.up, -direction);
             transform.rotation = slopeRotation * transform.rotation;
 
-            rigibody.velocity = Vector2.zero;
         }
 
     }
@@ -192,9 +248,10 @@ public class PlayerController : MonoBehaviour
 
         // Unassign inputmoveAction
         jumpAction.Dispose();
-        attractAction.Dispose();
+        attract1Action.Dispose();
         pauseAction.Dispose();
         zoomAction.Dispose();
+        attract2Action.Dispose();
     }
 
     #endregion Engine
@@ -204,7 +261,9 @@ public class PlayerController : MonoBehaviour
     void Move()
     {
         if (grounded)
-            transform.position = transform.position + transform.right * moveSpeed * moveInputs.x; //Vector3.ProjectOnPlane(transform.position + transform.right * moveSpeed * moveInputs.x, normal);
+        {
+            transform.position = transform.position + transform.right * moveInputs.x * moveSpeed * Time.deltaTime;
+        }
     }
 
     void Jump()
@@ -213,7 +272,7 @@ public class PlayerController : MonoBehaviour
         {
             // default jump
             AudioManager.instance.Play("Jump");
-            rigibody.AddForce((transform.up + transform.right * moveInputs.x).normalized * jumpForce, ForceMode2D.Impulse);
+            rigibody.AddForce((1.5f*transform.up + transform.right * moveInputs.x).normalized * jumpForce, ForceMode2D.Impulse);
             StartCoroutine(YieldGravity());
         }
         else if (canBoost)
@@ -235,30 +294,51 @@ public class PlayerController : MonoBehaviour
             float temp = 1e6f;
             Vector3 direction = currentBody == null ? Vector3.zero : (currentBody.transform.position - transform.position).normalized;
 
-            if (true)//!grounded)
+            foreach (GameObject gravityBody in gravityBodies)
             {
-                foreach (GameObject gravityBody in gravityBodies)
+                float distance = Vector2.Distance(transform.position, gravityBody.transform.position)
+                    - gravityBody.GetComponent<SpriteRenderer>().bounds.size.x / 2;
+
+                if (distance < temp)
                 {
-                    float distance = Vector2.Distance(transform.position, gravityBody.transform.position)
-                        - gravityBody.GetComponent<SpriteRenderer>().bounds.size.x / 2;
-
-                    if (distance < temp)
-                    {
-                        temp = distance;
-                        currentBody = gravityBody;
-                    }
+                    temp = distance;
+                    currentBody = gravityBody;
                 }
-
-                // Pull towards
-                rigibody.AddForce(direction * Mathf.Clamp(attract ? attractForce : gravityConst / temp, gravityMin, Mathf.Infinity));
-                rigibody.velocity = Vector3.ClampMagnitude(rigibody.velocity, maxVelocity);
             }
 
-            // Rotate
-            if (grounded || attract || temp < rotateDistance)
+            temp = 1e6f;
+            foreach (GameObject gravityBody in gravityBodies)
             {
-                Quaternion slopeRotation = Quaternion.FromToRotation(transform.up, -direction);
-                transform.rotation = Quaternion.Lerp(transform.rotation, slopeRotation * transform.rotation, rotateSpeed * Time.fixedDeltaTime);
+                float distance = Vector2.Distance(transform.position, gravityBody.transform.position)
+                    - gravityBody.GetComponent<SpriteRenderer>().bounds.size.x / 2;
+
+                if (distance < temp && gravityBody != currentBody)
+                {
+                    temp = distance;
+                    secondaryBody = gravityBody;
+                }
+            }
+
+            if(attract && Vector2.Distance(transform.position, attractBody.transform.position) > attractDistance) 
+            {
+                attractBody = null;
+                attract = false;
+            }
+
+            // Pull towards
+            rigibody.AddForce( attract ? ((attractBody.transform.position - transform.position).normalized * attractForce ) : (direction * Mathf.Clamp(gravityConst / temp, gravityMin, Mathf.Infinity)));
+            rigibody.velocity = Vector3.ClampMagnitude(rigibody.velocity, maxVelocity);
+
+            // Rotate
+            if (attract || (temp < rotateDistance && !grounded))
+            {
+                Quaternion slopeRotation = Quaternion.FromToRotation(transform.up, attract ? -(attractBody.transform.position - transform.position).normalized : -direction);
+                Quaternion targetRotation = Quaternion.Lerp(transform.rotation, slopeRotation * transform.rotation, rotateSpeed * Time.fixedDeltaTime);
+                if (Mathf.Abs(transform.rotation.z - targetRotation.z) > .001f) 
+                {
+                    transform.rotation = targetRotation;
+                    //transform.rotation = Quaternion.Euler(0f, 0f, transform.rotation.z);
+                }
             }
         }
     }
@@ -267,20 +347,27 @@ public class PlayerController : MonoBehaviour
     {
 
         RaycastHit2D hit = Physics2D.Raycast(transform.position, -transform.up, groundCheckDistance, LayerMask.GetMask("Ground"));
-        if (!grounded && hit.collider != null)
+        if (hit.collider != null)
         {
+            //if the current goTransform.up.y value has passed the threshold test  
+            if (oldNormal.y >= transform.up.y + .009f || oldNormal.y <= transform.up.y - .009f)
+            {
+                //set the up vector to match the normal of the ray's collision  
+                transform.up = hit.normal;
+            }
+
+            //store the current hit.normal inside the oldNormal  
+            oldNormal = hit.normal;
 
             attract = false;
             grounded = true;
             canBoost = true;
-            normal = hit.normal;
-        } else if (hit.collider == null)
+        } else
         {
             grounded = false;
         }
 
-        if (hit.point != Vector2.zero)
-            Debug.DrawLine(transform.position, hit.point, Color.blue, 0.1f);
+        Debug.DrawRay(transform.position, -transform.up * groundCheckDistance, Color.blue, 0.1f);
     }
 
     IEnumerator YieldGravity() 
@@ -288,6 +375,47 @@ public class PlayerController : MonoBehaviour
         useGravity = false;
         yield return new WaitForSeconds(0.2f);
         useGravity = true;
+    }
+
+    void UpdateRadialIcons() 
+    {
+        if (showHelp && helpRadialIndicator != null) 
+        {
+            if (warpGate.Visible && helpRadialIndicator.Visible)
+                helpRadialIndicator.SetVisibility(false);
+            else if (!warpGate.Visible && !helpRadialIndicator.Visible)
+                helpRadialIndicator.SetVisibility(true);
+
+            helpRadialIndicator.SetAngle(Vector2.SignedAngle(Vector2.up, (warpGate.transform.position - transform.position).normalized));
+        }
+
+        if (currentBody != null) 
+        {
+            attract1RadialIndicator.SetAngle(Vector2.SignedAngle(Vector2.up, (currentBody.transform.position - transform.position).normalized));
+
+            if (attract1RadialIndicator.Visible && (Vector2.Distance(currentBody.transform.position, transform.position) > attractDistance || grounded))
+            {
+                attract1RadialIndicator.SetVisibility(false);
+            }
+            else if (!attract1RadialIndicator.Visible && (Vector2.Distance(currentBody.transform.position, transform.position) < attractDistance && !grounded))
+            {
+                attract1RadialIndicator.SetVisibility(true);
+            }
+        }
+
+        if (secondaryBody != null) 
+        {
+            attract2RadialIndicator.SetAngle(Vector2.SignedAngle(Vector2.up, (secondaryBody.transform.position - transform.position).normalized));
+
+
+            if (attract2RadialIndicator.Visible && (Vector2.Distance(secondaryBody.transform.position, transform.position) > attractDistance || grounded))
+            {
+                attract2RadialIndicator.SetVisibility(false);
+            } else if (!attract2RadialIndicator.Visible && (Vector2.Distance(secondaryBody.transform.position, transform.position) < attractDistance && !grounded)) 
+            {
+                attract2RadialIndicator.SetVisibility(true);
+            }
+        }
     }
 
     #endregion Private Methods
@@ -298,7 +426,8 @@ public class PlayerController : MonoBehaviour
     {
         moveAction.Enable();
         jumpAction.Enable();
-        attractAction.Enable();
+        attract1Action.Enable();
+        attract2Action.Enable();
         pauseAction.Enable();
         zoomAction.Enable();
     }
@@ -307,7 +436,8 @@ public class PlayerController : MonoBehaviour
     {
         moveAction.Disable();
         jumpAction.Disable();
-        attractAction.Disable();
+        attract1Action.Disable();
+        attract2Action.Disable();
         pauseAction.Disable();
         zoomAction.Disable();
     }

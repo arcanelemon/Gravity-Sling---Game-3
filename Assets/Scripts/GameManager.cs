@@ -36,9 +36,26 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     Vector2 bounds;
 
+
+
+    [SerializeField]
+    TextMeshProUGUI endTimeUGUI;
+
+
+
+    [SerializeField]
+    TextMeshProUGUI endScrapUGUI;
+
+
+
+    [SerializeField]
+    TextMeshProUGUI totalScrapUGUI;
+
     float time;
 
-    float totalScrap;
+    int totalScrap;
+
+    int scrapBank;
 
     IEnumerator slowTimeCoroutine;
 
@@ -65,8 +82,10 @@ public class GameManager : MonoBehaviour
 
         Time.timeScale = 1;
 
+        PlayerData data = SaveManager.LoadPlayerData();
+        if (data != null)
+            scrapBank = data.scraps;
         AudioManager.instance.Play("Background_music_2");
-
     }
 
     // Update is called once per frame
@@ -119,7 +138,8 @@ public class GameManager : MonoBehaviour
 
     void StopSlowTimeCoroutine() 
     {
-        StopCoroutine(slowTimeCoroutine);
+        if (slowTimeCoroutine != null)
+            StopCoroutine(slowTimeCoroutine);
         slowTimeCoroutine = null;
         Time.timeScale = 1;
     }
@@ -152,6 +172,7 @@ public class GameManager : MonoBehaviour
         }
 
         Time.timeScale = 1;
+        SaveManager.SavePlayerData(new PlayerData(totalScrap + scrapBank));
         SceneManager.LoadScene("Main Menu");
     }
 
@@ -172,15 +193,18 @@ public class GameManager : MonoBehaviour
 
     public void EndLevel() 
     {
+        FindObjectOfType<PlayerController>().Disable();
         endMenu.SetActive(true);
-        //endMenu.GetComponent<EndMenu>().Populate(totalScrap, time);
+        endTimeUGUI.text = ((int) time).ToString() + "s";
+        endScrapUGUI.text = totalScrap.ToString(); 
+        totalScrapUGUI.text = scrapBank.ToString();
         StartSlowTimeCoroutine();
         StartCoroutine(StartCountdownTimer());
     }
 
     public void IncrementScrap(int value) 
     {
-        scrapFillImage.fillAmount = scrapFillImage.fillAmount + value / totalScrap;
+        scrapFillImage.fillAmount = scrapFillImage.fillAmount + value / (float) totalScrap;
     }
 
     public void Pause() 

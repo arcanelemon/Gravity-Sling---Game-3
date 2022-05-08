@@ -16,7 +16,13 @@ public class PlayManager : MonoBehaviour
     Button prevButton;
 
     [SerializeField]
-    SystemCollection[] systemCollections;
+    PlanetSystemData[] planetSystems;
+
+    [SerializeField]
+    PlanetButton[] planetButtons;
+
+    [SerializeField]
+    TextMeshProUGUI totalScrapUGUI;
 
     [SerializeField]
     TextMeshProUGUI scrapRequirementUGUI;
@@ -26,22 +32,23 @@ public class PlayManager : MonoBehaviour
 
     int index;
 
-    int totalScraps = 480;
+    Animator animator;
+
+    PlayerData data = null;
 
     #endregion Variables
     
     #region Engine
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        // Check if new system unlocked
-    }
+        SaveManager.ClearPlayerData();
+        animator = GetComponent<Animator>();
+        data = SaveManager.LoadPlayerData();
+        SetCollection(0);
+        totalScrapUGUI.text = data.scraps.ToString();
 
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     #endregion Engine
@@ -64,33 +71,57 @@ public class PlayManager : MonoBehaviour
 
     public void SetCollection(int id) 
     {
-        if (index == systemCollections.Length - 1)
+        if (index == planetSystems.Length - 1)
+        {
+            prevButton.interactable = true;
             nextButton.interactable = false;
+            nextButton.Select();
+        }
         else if (index == 0)
+        {
+            nextButton.interactable = true;
             prevButton.interactable = false;
-        else 
-        { 
+            prevButton.Select();
+        }
+        else
+        {
             nextButton.interactable = true;
             prevButton.interactable = true;
         }
 
-        foreach (SystemCollection collection in systemCollections)
+        int i = 0;
+        foreach (PlanetData planet in planetSystems[id].Planets)
         {
-            collection.gameObject.SetActive(false);
+            // set button to planet sprite and target=
+            planetButtons[i].UpdateButton(planet);
 
+
+            // see if prevous planet has been played
+
+            i++;
         }
 
-        systemCollections[id].gameObject.SetActive(true);
-        systemNameUGUI.text = systemCollections[id].SystemName.ToUpper();
+        systemNameUGUI.text = planetSystems[id].SystemName.ToUpper();
 
-        int scrapRequirement = systemCollections[id].ScrapRequirement - totalScraps;
+        int scrapRequirement = planetSystems[id].ScrapRequirement - (data == null ? 0 : data.scraps);
 
         if (scrapRequirement > 0)
         {
+            animator.Play("Disabled");
             scrapRequirementUGUI.transform.parent.gameObject.SetActive(true);
             scrapRequirementUGUI.text = scrapRequirement + " scraps";
-        } else
+
+            foreach (Button button in planetButtons)
+                button.interactable = false;
+        }
+        else
+        {
+            animator.Play("Enabled");
             scrapRequirementUGUI.transform.parent.gameObject.SetActive(false);
+
+            foreach (Button button in planetButtons)
+                button.interactable = true;
+        }
     }
 
     public void NextCollection() 

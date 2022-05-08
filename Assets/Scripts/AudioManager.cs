@@ -92,8 +92,7 @@ public class AudioManager : MonoBehaviour
     public void SetOutputGroupVolume(Sound.OutputGroups group, float volume)
     {
         Mathf.Clamp(volume, 0, 1);
-
-        audioMixer.SetFloat(FormatOutputGroupToVolume(group), Mathf.Log10(volume) * 20);
+        audioMixer.SetFloat(FormatOutputGroupToVolume(group), Mathf.Max(Mathf.Log10(volume) * 20, -80));
 
         Save();
     }
