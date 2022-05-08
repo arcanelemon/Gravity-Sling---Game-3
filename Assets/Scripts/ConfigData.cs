@@ -5,7 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public class ConfigData
 {
-    public Resolution resolution;
+    public string resolution;
 
     public DisplayMode.Mode displayMode;
 
@@ -15,7 +15,7 @@ public class ConfigData
 
     public float fxVolume;
 
-    public ConfigData(Resolution resolution, DisplayMode.Mode displayMode, float[] outputVolume) 
+    public ConfigData(string resolution, DisplayMode.Mode displayMode, float[] outputVolume) 
     {
         this.resolution = resolution;
         this.displayMode = displayMode;

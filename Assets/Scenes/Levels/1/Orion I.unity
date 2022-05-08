@@ -926,11 +926,11 @@ MonoBehaviour:
   moveSpeed: 10
   jumpForce: 15
   boostForce: 10
-  attractForce: 150
-  attractDistance: 15
-  rotateSpeed: 10
-  rotateDistance: 5
-  groundCheckDistance: 0.55
+  attractForce: 130
+  attractDistance: 30
+  rotateSpeed: 8
+  rotateDistance: 15
+  groundCheckDistance: 1
   maxVelocity: 50
   gravityConst: 100
   gravityMin: 20
@@ -5197,6 +5197,10 @@ PrefabInstance:
     - target: {fileID: 2294604006401947376, guid: c480e097bbf4f6249ac210e34d6e8ab3, type: 3}
       propertyPath: m_Name
       value: Game Manager
+      objectReference: {fileID: 0}
+    - target: {fileID: 7469498177933123348, guid: c480e097bbf4f6249ac210e34d6e8ab3, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.002029419
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c480e097bbf4f6249ac210e34d6e8ab3, type: 3}

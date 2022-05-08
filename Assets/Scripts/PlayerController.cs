@@ -232,11 +232,12 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Ground")) 
         {
+
+            rigibody.velocity = Vector3.zero;
             Vector3 direction = (currentBody.transform.position - transform.position).normalized;
             Quaternion slopeRotation = Quaternion.FromToRotation(transform.up, -direction);
             transform.rotation = slopeRotation * transform.rotation;
 
-            rigibody.velocity = Vector2.zero;
         }
 
     }
@@ -271,7 +272,7 @@ public class PlayerController : MonoBehaviour
         {
             // default jump
             AudioManager.instance.Play("Jump");
-            rigibody.AddForce((2*transform.up + transform.right * moveInputs.x).normalized * jumpForce, ForceMode2D.Impulse);
+            rigibody.AddForce((1.5f*transform.up + transform.right * moveInputs.x).normalized * jumpForce, ForceMode2D.Impulse);
             StartCoroutine(YieldGravity());
         }
         else if (canBoost)
@@ -331,7 +332,7 @@ public class PlayerController : MonoBehaviour
             // Rotate
             if (attract || (temp < rotateDistance && !grounded))
             {
-                Quaternion slopeRotation = Quaternion.FromToRotation(transform.up, -direction);
+                Quaternion slopeRotation = Quaternion.FromToRotation(transform.up, attract ? -(attractBody.transform.position - transform.position).normalized : -direction);
                 Quaternion targetRotation = Quaternion.Lerp(transform.rotation, slopeRotation * transform.rotation, rotateSpeed * Time.fixedDeltaTime);
                 if (Mathf.Abs(transform.rotation.z - targetRotation.z) > .001f) 
                 {

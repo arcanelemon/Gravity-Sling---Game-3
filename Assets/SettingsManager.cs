@@ -18,12 +18,11 @@ public class SettingsManager : MonoBehaviour
 
         foreach(Transform child in children) 
         {
-            if (child.parent = transform)
+            if (child.parent == transform)
                 temp.Add(child);
         }
 
         children = temp.ToArray();
-        PopulateSettings();
     }
 
     #endregion Engine
@@ -135,7 +134,7 @@ public class SettingsManager : MonoBehaviour
         }
 
         // Save Data
-        SaveManager.SaveConfigData(new ConfigData(resolution, displayMode, new float[] { masterVolume, musicVolume, fxVolume }));
+        SaveManager.SaveConfigData(new ConfigData(resolution.width + "x" + resolution.height, displayMode, new float[] { masterVolume, musicVolume, fxVolume }));
     }
 
     #endregion Public Methods

@@ -36,6 +36,21 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     Vector2 bounds;
 
+
+
+    [SerializeField]
+    TextMeshProUGUI endTimeUGUI;
+
+
+
+    [SerializeField]
+    TextMeshProUGUI endScrapUGUI;
+
+
+
+    [SerializeField]
+    TextMeshProUGUI totalScrapUGUI;
+
     float time;
 
     int totalScrap;
@@ -123,7 +138,8 @@ public class GameManager : MonoBehaviour
 
     void StopSlowTimeCoroutine() 
     {
-        StopCoroutine(slowTimeCoroutine);
+        if (slowTimeCoroutine != null)
+            StopCoroutine(slowTimeCoroutine);
         slowTimeCoroutine = null;
         Time.timeScale = 1;
     }
@@ -177,15 +193,18 @@ public class GameManager : MonoBehaviour
 
     public void EndLevel() 
     {
+        FindObjectOfType<PlayerController>().Disable();
         endMenu.SetActive(true);
-        //endMenu.GetComponent<EndMenu>().Populate(totalScrap, time);
+        endTimeUGUI.text = ((int) time).ToString() + "s";
+        endScrapUGUI.text = totalScrap.ToString(); 
+        totalScrapUGUI.text = scrapBank.ToString();
         StartSlowTimeCoroutine();
         StartCoroutine(StartCountdownTimer());
     }
 
     public void IncrementScrap(int value) 
     {
-        scrapFillImage.fillAmount = scrapFillImage.fillAmount + value / totalScrap;
+        scrapFillImage.fillAmount = scrapFillImage.fillAmount + value / (float) totalScrap;
     }
 
     public void Pause() 

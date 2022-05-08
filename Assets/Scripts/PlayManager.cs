@@ -22,12 +22,17 @@ public class PlayManager : MonoBehaviour
     PlanetButton[] planetButtons;
 
     [SerializeField]
+    TextMeshProUGUI totalScrapUGUI;
+
+    [SerializeField]
     TextMeshProUGUI scrapRequirementUGUI;
 
     [SerializeField]
     TextMeshProUGUI systemNameUGUI;
 
     int index;
+
+    Animator animator;
 
     PlayerData data = null;
 
@@ -36,10 +41,14 @@ public class PlayManager : MonoBehaviour
     #region Engine
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
+        SaveManager.ClearPlayerData();
+        animator = GetComponent<Animator>();
         data = SaveManager.LoadPlayerData();
         SetCollection(0);
+        totalScrapUGUI.text = data.scraps.ToString();
+
     }
 
     #endregion Engine
@@ -63,11 +72,19 @@ public class PlayManager : MonoBehaviour
     public void SetCollection(int id) 
     {
         if (index == planetSystems.Length - 1)
+        {
+            prevButton.interactable = true;
             nextButton.interactable = false;
+            nextButton.Select();
+        }
         else if (index == 0)
+        {
+            nextButton.interactable = true;
             prevButton.interactable = false;
-        else 
-        { 
+            prevButton.Select();
+        }
+        else
+        {
             nextButton.interactable = true;
             prevButton.interactable = true;
         }
@@ -90,10 +107,21 @@ public class PlayManager : MonoBehaviour
 
         if (scrapRequirement > 0)
         {
+            animator.Play("Disabled");
             scrapRequirementUGUI.transform.parent.gameObject.SetActive(true);
             scrapRequirementUGUI.text = scrapRequirement + " scraps";
-        } else
+
+            foreach (Button button in planetButtons)
+                button.interactable = false;
+        }
+        else
+        {
+            animator.Play("Enabled");
             scrapRequirementUGUI.transform.parent.gameObject.SetActive(false);
+
+            foreach (Button button in planetButtons)
+                button.interactable = true;
+        }
     }
 
     public void NextCollection() 

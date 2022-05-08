@@ -50,21 +50,33 @@ public static class SaveManager
 
     public static ConfigData LoadConfigData() 
     {
-        string path = Application.persistentDataPath + "/config.dat";
-        if (File.Exists(path)) 
+        try
         {
-            BinaryFormatter formatter = new BinaryFormatter();
-            FileStream stream = new FileStream(path, FileMode.Open);
+            string path = Application.persistentDataPath + "/config.dat";
+            if (File.Exists(path))
+            {
+                BinaryFormatter formatter = new BinaryFormatter();
+                FileStream stream = new FileStream(path, FileMode.Open);
 
-            ConfigData data = formatter.Deserialize(stream) as ConfigData;
-            stream.Close();
+                ConfigData data = formatter.Deserialize(stream) as ConfigData;
+                stream.Close();
 
-            return data;
+                return data;
 
-        } else 
+            }
+            else
+            {
+                Debug.LogWarning("Save file not found in: " + path);
+                return null;
+            }
+        } catch(System.Exception e) 
         {
-            Debug.LogWarning("Save file not found in: " + path);
             return null;
         }
+    }
+
+    public static void ClearPlayerData() 
+    {
+        SavePlayerData(new PlayerData(0));
     }
 }
