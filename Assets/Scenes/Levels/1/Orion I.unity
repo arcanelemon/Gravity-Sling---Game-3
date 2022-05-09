@@ -5150,6 +5150,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2294604005744121471, guid: c480e097bbf4f6249ac210e34d6e8ab3, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2294604005744121471, guid: c480e097bbf4f6249ac210e34d6e8ab3, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2294604005744121471, guid: c480e097bbf4f6249ac210e34d6e8ab3, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2294604005744121471, guid: c480e097bbf4f6249ac210e34d6e8ab3, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2294604006401946894, guid: c480e097bbf4f6249ac210e34d6e8ab3, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -5194,9 +5210,69 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2294604006401946895, guid: c480e097bbf4f6249ac210e34d6e8ab3, type: 3}
+      propertyPath: sounds.Array.size
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2294604006401946895, guid: c480e097bbf4f6249ac210e34d6e8ab3, type: 3}
+      propertyPath: sounds.Array.data[9].name
+      value: Lazer_firing
+      objectReference: {fileID: 0}
+    - target: {fileID: 2294604006401946895, guid: c480e097bbf4f6249ac210e34d6e8ab3, type: 3}
+      propertyPath: sounds.Array.data[9].pitch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2294604006401946895, guid: c480e097bbf4f6249ac210e34d6e8ab3, type: 3}
+      propertyPath: sounds.Array.data[9].volume
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2294604006401946895, guid: c480e097bbf4f6249ac210e34d6e8ab3, type: 3}
+      propertyPath: sounds.Array.data[9].looping
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2294604006401946895, guid: c480e097bbf4f6249ac210e34d6e8ab3, type: 3}
+      propertyPath: sounds.Array.data[9].audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 57f62709b11c0cf4aac4a46d694230df, type: 3}
+    - target: {fileID: 2294604006401946895, guid: c480e097bbf4f6249ac210e34d6e8ab3, type: 3}
+      propertyPath: sounds.Array.data[9].outputGroup
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2294604006401947376, guid: c480e097bbf4f6249ac210e34d6e8ab3, type: 3}
       propertyPath: m_Name
       value: Game Manager
+      objectReference: {fileID: 0}
+    - target: {fileID: 2294604007011837183, guid: c480e097bbf4f6249ac210e34d6e8ab3, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2294604007011837183, guid: c480e097bbf4f6249ac210e34d6e8ab3, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2294604007011837183, guid: c480e097bbf4f6249ac210e34d6e8ab3, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2294604007011837183, guid: c480e097bbf4f6249ac210e34d6e8ab3, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2294604007415875020, guid: c480e097bbf4f6249ac210e34d6e8ab3, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2294604007415875020, guid: c480e097bbf4f6249ac210e34d6e8ab3, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2294604007415875020, guid: c480e097bbf4f6249ac210e34d6e8ab3, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2294604007415875020, guid: c480e097bbf4f6249ac210e34d6e8ab3, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7469498177933123348, guid: c480e097bbf4f6249ac210e34d6e8ab3, type: 3}
       propertyPath: m_AnchoredPosition.x
