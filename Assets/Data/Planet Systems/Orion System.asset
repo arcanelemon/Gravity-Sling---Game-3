@@ -16,5 +16,5 @@ MonoBehaviour:
   scrapRequirement: 0
   planets:
   - {fileID: 11400000, guid: 60f11dc4943deaa4e8f3e948263320c8, type: 2}
-  - {fileID: 11400000, guid: 60f11dc4943deaa4e8f3e948263320c8, type: 2}
+  - {fileID: 11400000, guid: 05a13fe72f22eed48bebabd8ab4d5431, type: 2}
   - {fileID: 11400000, guid: 60f11dc4943deaa4e8f3e948263320c8, type: 2}
