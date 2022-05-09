@@ -43,7 +43,6 @@ public class PlayManager : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        SaveManager.ClearPlayerData();
         animator = GetComponent<Animator>();
         data = SaveManager.LoadPlayerData();
         SetCollection(0);
