@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
+using UnityEngine.UI;
 
 public class RadialIndicator : MonoBehaviour
 {
@@ -14,6 +14,9 @@ public class RadialIndicator : MonoBehaviour
     public bool Visible => visible;
 
     CanvasGroup group;
+
+    [SerializeField]
+    Image icon;
 
     [SerializeField]
     Sprite[] sprites;
@@ -50,7 +53,18 @@ public class RadialIndicator : MonoBehaviour
 
     public void SetSpriteFromType(Type type) 
     {
-
+        switch (type) 
+        {
+            case Type.Help:
+                icon.sprite = sprites[0];
+                break;
+            case Type.Attract1:
+                icon.sprite = sprites[1];
+                break;
+            case Type.Attract2:
+                icon.sprite = sprites[2];
+                break;
+        }
     }
 
     public void SetVisibility(bool visible) 
