@@ -335,7 +335,7 @@ public class PlayerController : MonoBehaviour
             }
 
             // Pull towards
-            rigibody.AddForce( attract ? ((attractBody.transform.position - transform.position).normalized * attractForce ) : (direction * Mathf.Clamp(gravityConst * (grounded ? 10: 1) / temp, gravityMin, Mathf.Infinity)));
+            rigibody.AddForce( attract ? ((attractBody.transform.position - transform.position).normalized * attractForce ) : (direction * Mathf.Clamp(gravityConst / temp, gravityMin, Mathf.Infinity)));
             rigibody.velocity = Vector3.ClampMagnitude(rigibody.velocity, maxVelocity);
 
             // Rotate
