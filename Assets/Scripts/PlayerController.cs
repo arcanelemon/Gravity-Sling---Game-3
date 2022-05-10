@@ -210,6 +210,9 @@ public class PlayerController : MonoBehaviour
 
         attract1RadialIndicator = UIManager.instance.CreateRadialIndicator(RadialIndicator.Type.Attract1);
         attract2RadialIndicator = UIManager.instance.CreateRadialIndicator(RadialIndicator.Type.Attract2);
+        attract1RadialIndicator.SetVisibility(false);
+        attract2RadialIndicator.SetVisibility(false);
+
     }
 
      void Update()
@@ -237,7 +240,6 @@ public class PlayerController : MonoBehaviour
             Vector3 direction = (currentBody.transform.position - transform.position).normalized;
             Quaternion slopeRotation = Quaternion.FromToRotation(transform.up, -direction);
             transform.rotation = slopeRotation * transform.rotation;
-
         }
 
     }
