@@ -342,6 +342,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.003, y: 0.536, z: 0}
   m_LocalScale: {x: 0.3819193, y: 0.30308315, z: 0.30073613}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1041748162}
   m_RootOrder: 0
@@ -897,6 +898,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1700194449}
   - {fileID: 1689698645}
@@ -988,6 +990,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 5
@@ -1175,6 +1178,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1574746030}
   - {fileID: 2039321106}
@@ -1489,6 +1493,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.032, y: -0.018, z: 0}
   m_LocalScale: {x: 0.99999005, y: 0.99999005, z: 0.99999005}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 285809661}
   m_Father: {fileID: 1247414333}
@@ -1647,6 +1652,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -11}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1247414333}
   m_RootOrder: 0
@@ -1870,6 +1876,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1202532292}
   - {fileID: 1041748162}
@@ -2465,6 +2472,7 @@ Transform:
   m_LocalRotation: {x: 0.003734669, y: -0, z: -0, w: 0.999993}
   m_LocalPosition: {x: 0.5, y: -44.4, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 2}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 678611195}
   m_RootOrder: 0
@@ -2743,6 +2751,10 @@ PrefabInstance:
       propertyPath: m_text
       value: ORION III
       objectReference: {fileID: 0}
+    - target: {fileID: 2294604005655951552, guid: c480e097bbf4f6249ac210e34d6e8ab3, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 50304b7b49715414c89f11902f2d86d2, type: 3}
     - target: {fileID: 2294604006401946894, guid: c480e097bbf4f6249ac210e34d6e8ab3, type: 3}
       propertyPath: m_RootOrder
       value: 2
