@@ -1008,7 +1008,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2294604005577745748, guid: c480e097bbf4f6249ac210e34d6e8ab3, type: 3}
       propertyPath: m_text
-      value: SERIOUS I
+      value: SERIOUS III
       objectReference: {fileID: 0}
     - target: {fileID: 2294604006401946894, guid: c480e097bbf4f6249ac210e34d6e8ab3, type: 3}
       propertyPath: m_RootOrder

@@ -339,7 +339,7 @@ public class PlayerController : MonoBehaviour
             rigibody.velocity = Vector3.ClampMagnitude(rigibody.velocity, maxVelocity);
 
             // Rotate
-            if (attract || (temp < rotateDistance && !grounded))
+            if (attract || (temp < (rotateDistance + currentBody.GetComponent<SpriteRenderer>().bounds.size.x / 2) && !grounded))
             {
                 Quaternion slopeRotation = Quaternion.FromToRotation(transform.up, attract ? -(attractBody.transform.position - transform.position).normalized : -direction);
                 Quaternion targetRotation = Quaternion.Lerp(transform.rotation, slopeRotation * transform.rotation, rotateSpeed * Time.fixedDeltaTime);

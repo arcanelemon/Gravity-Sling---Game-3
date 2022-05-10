@@ -29,4 +29,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Levels/1/Orion III.unity
     guid: 5b34f83f6ffa1ac4e975ded6c78c4991
+  - enabled: 1
+    path: Assets/Scenes/Levels/2/Scorpio III.unity
+    guid: 58ae89b37ade8ae45b0ebdb13a607bc8
+  - enabled: 1
+    path: Assets/Scenes/Levels/3/Serious II.unity
+    guid: 36f6201456293ba42a58295f65266be2
   m_configObjects: {}

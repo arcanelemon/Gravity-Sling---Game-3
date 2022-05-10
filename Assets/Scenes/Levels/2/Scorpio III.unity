@@ -2323,7 +2323,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2294604005577745748, guid: c480e097bbf4f6249ac210e34d6e8ab3, type: 3}
       propertyPath: m_text
-      value: 'SCORPIO II
+      value: 'SCORPIO III
 
 '
       objectReference: {fileID: 0}
@@ -4863,12 +4863,38 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3642099520967780186, guid: 6bf3af32a91fd8147b50f101d8981232, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 7862556619acaa64887114d33ac798d3, type: 3}
     - target: {fileID: 3642099520967780187, guid: 6bf3af32a91fd8147b50f101d8981232, type: 3}
       propertyPath: m_Name
       value: Earthy_Planet
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3642099520967780184, guid: 6bf3af32a91fd8147b50f101d8981232, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 6bf3af32a91fd8147b50f101d8981232, type: 3}
+--- !u!1 &1879673767 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3642099520967780187, guid: 6bf3af32a91fd8147b50f101d8981232, type: 3}
+  m_PrefabInstance: {fileID: 1879673766}
+  m_PrefabAsset: {fileID: 0}
+--- !u!58 &1879673768
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1879673767}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 2.56
 --- !u!1001 &1884734297
 PrefabInstance:
   m_ObjectHideFlags: 0
