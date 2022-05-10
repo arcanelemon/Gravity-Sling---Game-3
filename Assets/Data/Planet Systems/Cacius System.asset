@@ -17,4 +17,4 @@ MonoBehaviour:
   planets:
   - {fileID: 11400000, guid: a19530a990d698b43b1c62d4ff05f483, type: 2}
   - {fileID: 11400000, guid: 787c4d069ab0aa1469cf8c8364c7d9f4, type: 2}
-  - {fileID: 11400000, guid: 60f11dc4943deaa4e8f3e948263320c8, type: 2}
+  - {fileID: 11400000, guid: 0d6d83d149b367b4fb73e21eb2dfcdd1, type: 2}
