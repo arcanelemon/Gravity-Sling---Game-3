@@ -82,6 +82,7 @@ public class Laser : MonoBehaviour
         animator.SetBool("Warm", false);
         animator.SetBool("Fire", true);
 
+        AudioManager.instance.Play("Lazer_firing");
         StartCoroutine(YieldFireTime());
     }
 

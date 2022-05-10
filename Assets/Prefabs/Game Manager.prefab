@@ -2070,7 +2070,7 @@ MonoBehaviour:
     audioSource: {fileID: 0}
   - name: Time_Up
     pitch: 1
-    volume: 0.23
+    volume: 0.112
     looping: 0
     outputGroup: 2
     audioClip: {fileID: 8300000, guid: 14c4cfc2100a2774e9f80fec3bdc27d6, type: 3}
