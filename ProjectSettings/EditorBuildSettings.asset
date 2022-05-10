@@ -11,9 +11,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Levels/3/Serious I.unity
     guid: 0105f331a3d120a45a30bf6b931dc5d3
-  - enabled: 1
-    path: Assets/Scenes/Levels/1/Orion II.unity
-    guid: cd7914c7e4373ce429d67fca1f055882
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/Scenes/Levels/2/Scorpio I.unity
     guid: c8208b8fc569ffd4ebad1ce2e3e6fafe
