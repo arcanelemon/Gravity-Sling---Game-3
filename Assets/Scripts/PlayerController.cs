@@ -116,7 +116,7 @@ public class PlayerController : MonoBehaviour
             attractBody = currentBody;
         }
     }
-    
+
     void OnAttract1Release(InputAction.CallbackContext context)
     {
         if (attract && currentBody != null)
@@ -127,7 +127,7 @@ public class PlayerController : MonoBehaviour
             attract = false;
         }
     }
-    
+
     void OnAttract2Press(InputAction.CallbackContext context)
     {
         if (!grounded)
@@ -136,7 +136,7 @@ public class PlayerController : MonoBehaviour
             attractBody = secondaryBody;
         }
     }
-    
+
     void OnAttract2Release(InputAction.CallbackContext context)
     {
         if (attract && secondaryBody != null)
@@ -150,11 +150,11 @@ public class PlayerController : MonoBehaviour
 
     void OnPausePress(InputAction.CallbackContext context)
     {
-        if (paused) 
+        if (paused)
         {
             paused = false;
             GameManager.instance.Resume();
-        } else 
+        } else
         {
             paused = true;
             GameManager.instance.Pause();
@@ -164,7 +164,7 @@ public class PlayerController : MonoBehaviour
     {
         cam.ZoomOut();
     }
-    
+
     void OnZoomRelease(InputAction.CallbackContext context)
     {
         cam.ResetZoom();
@@ -180,8 +180,8 @@ public class PlayerController : MonoBehaviour
         var inputMap = inputActions.FindActionMap("Player");
         moveAction = inputMap.FindAction("Move");
         jumpAction = inputMap.FindAction("Jump");
-        attract1Action = inputMap.FindAction("Attract1"); 
-        attract2Action = inputMap.FindAction("Attract2"); 
+        attract1Action = inputMap.FindAction("Attract1");
+        attract2Action = inputMap.FindAction("Attract2");
         pauseAction = inputMap.FindAction("Pause");
         zoomAction = inputMap.FindAction("Zoom");
 
@@ -215,7 +215,7 @@ public class PlayerController : MonoBehaviour
 
     }
 
-     void Update()
+    void Update()
     {
         UpdateRadialIcons();
     }
@@ -233,15 +233,22 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Ground")) 
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
         {
 
             rigibody.velocity = Vector3.zero;
             Vector3 direction = (currentBody.transform.position - transform.position).normalized;
             Quaternion slopeRotation = Quaternion.FromToRotation(transform.up, -direction);
             transform.rotation = slopeRotation * transform.rotation;
+            transform.SetParent(collision.transform, true);
         }
 
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
+            collision.gameObject.transform.parent = null;
     }
 
     void OnDestroy()
@@ -328,7 +335,7 @@ public class PlayerController : MonoBehaviour
             }
 
             // Pull towards
-            rigibody.AddForce( attract ? ((attractBody.transform.position - transform.position).normalized * attractForce ) : (direction * Mathf.Clamp(gravityConst / temp, gravityMin, Mathf.Infinity)));
+            rigibody.AddForce( attract ? ((attractBody.transform.position - transform.position).normalized * attractForce ) : (direction * Mathf.Clamp(gravityConst * (grounded ? 10: 1) / temp, gravityMin, Mathf.Infinity)));
             rigibody.velocity = Vector3.ClampMagnitude(rigibody.velocity, maxVelocity);
 
             // Rotate
@@ -352,7 +359,7 @@ public class PlayerController : MonoBehaviour
         if (hit.collider != null)
         {
             //if the current goTransform.up.y value has passed the threshold test  
-            if (oldNormal.y >= transform.up.y + .009f || oldNormal.y <= transform.up.y - .009f)
+            if (oldNormal.y >= transform.up.y + .001f || oldNormal.y <= transform.up.y - .001f)
             {
                 //set the up vector to match the normal of the ray's collision  
                 transform.up = hit.normal;

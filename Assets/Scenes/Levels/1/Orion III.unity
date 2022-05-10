@@ -474,8 +474,30 @@ PrefabInstance:
       propertyPath: m_Name
       value: Red_Planet
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3642099520967780184, guid: 29186f7d888081d4a9d1e1a136bba48d, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 29186f7d888081d4a9d1e1a136bba48d, type: 3}
+--- !u!1 &301852388 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3642099520967780187, guid: 29186f7d888081d4a9d1e1a136bba48d, type: 3}
+  m_PrefabInstance: {fileID: 301852387}
+  m_PrefabAsset: {fileID: 0}
+--- !u!58 &301852389
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 301852388}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 2.56
 --- !u!1001 &306472116
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -646,12 +668,38 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3642099520967780186, guid: 9d792b517de0c9b4ab174b6e4fcbe5a4, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 6f20b6a8c04d065458a9c4ae06b3c9cd, type: 3}
     - target: {fileID: 3642099520967780187, guid: 9d792b517de0c9b4ab174b6e4fcbe5a4, type: 3}
       propertyPath: m_Name
       value: Belt_Planet
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3642099520967780184, guid: 9d792b517de0c9b4ab174b6e4fcbe5a4, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 9d792b517de0c9b4ab174b6e4fcbe5a4, type: 3}
+--- !u!1 &436995340 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3642099520967780187, guid: 9d792b517de0c9b4ab174b6e4fcbe5a4, type: 3}
+  m_PrefabInstance: {fileID: 436995339}
+  m_PrefabAsset: {fileID: 0}
+--- !u!58 &436995341
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 436995340}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 2.56
 --- !u!1001 &509275497
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -764,13 +812,35 @@ PrefabInstance:
       propertyPath: m_Name
       value: Purple_Planet
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3642099520967780184, guid: bb32cfe4b8c9c7b4593bc67e6b5246a9, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: bb32cfe4b8c9c7b4593bc67e6b5246a9, type: 3}
 --- !u!4 &541684181 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3642099520967780185, guid: bb32cfe4b8c9c7b4593bc67e6b5246a9, type: 3}
   m_PrefabInstance: {fileID: 541684180}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &541684182 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3642099520967780187, guid: bb32cfe4b8c9c7b4593bc67e6b5246a9, type: 3}
+  m_PrefabInstance: {fileID: 541684180}
+  m_PrefabAsset: {fileID: 0}
+--- !u!58 &541684183
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 541684182}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 2.56
 --- !u!4 &605566271 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6468566328177381547, guid: 4ed22e9bf8b43cb4a8473171d8d2498a, type: 3}
@@ -866,8 +936,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1700194449}
-  - {fileID: 1689698645}
   - {fileID: 1293629329}
+  - {fileID: 1689698645}
   - {fileID: 782554619}
   - {fileID: 541684181}
   - {fileID: 108848372}
@@ -1082,8 +1152,30 @@ PrefabInstance:
       propertyPath: m_Name
       value: Desert_Planet
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3642099520967780184, guid: f96f47f1359f971449d0f654494c67b1, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: f96f47f1359f971449d0f654494c67b1, type: 3}
+--- !u!1 &824692333 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3642099520967780187, guid: f96f47f1359f971449d0f654494c67b1, type: 3}
+  m_PrefabInstance: {fileID: 824692332}
+  m_PrefabAsset: {fileID: 0}
+--- !u!58 &824692334
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 824692333}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 2.56
 --- !u!1001 &827197464
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1243,8 +1335,30 @@ PrefabInstance:
       propertyPath: m_Name
       value: Planet
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3642099520967780184, guid: a232024bd21c1a545b232114746ff98f, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: a232024bd21c1a545b232114746ff98f, type: 3}
+--- !u!1 &1005528165 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3642099520967780187, guid: a232024bd21c1a545b232114746ff98f, type: 3}
+  m_PrefabInstance: {fileID: 1005528164}
+  m_PrefabAsset: {fileID: 0}
+--- !u!58 &1005528166
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1005528165}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 2.56
 --- !u!1 &1041748161
 GameObject:
   m_ObjectHideFlags: 0
@@ -1296,10 +1410,10 @@ MonoBehaviour:
   jumpForce: 15
   boostForce: 10
   attractForce: 150
-  attractDistance: 15
+  attractDistance: 30
   rotateSpeed: 10
-  rotateDistance: 5
-  groundCheckDistance: 0.55
+  rotateDistance: 10
+  groundCheckDistance: 0.7
   maxVelocity: 50
   gravityConst: 100
   gravityMin: 20
@@ -1561,8 +1675,30 @@ PrefabInstance:
       propertyPath: m_Name
       value: Purple_Planet (1)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3642099520967780184, guid: bb32cfe4b8c9c7b4593bc67e6b5246a9, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: bb32cfe4b8c9c7b4593bc67e6b5246a9, type: 3}
+--- !u!1 &1214582376 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3642099520967780187, guid: bb32cfe4b8c9c7b4593bc67e6b5246a9, type: 3}
+  m_PrefabInstance: {fileID: 1214582375}
+  m_PrefabAsset: {fileID: 0}
+--- !u!58 &1214582377
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1214582376}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 2.56
 --- !u!1 &1247414332
 GameObject:
   m_ObjectHideFlags: 0
@@ -1979,8 +2115,30 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rorange_Planet
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3642099520967780184, guid: 716e9e8fe77f82e43a4373aa9d9ca27c, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 716e9e8fe77f82e43a4373aa9d9ca27c, type: 3}
+--- !u!1 &1688931625 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3642099520967780187, guid: 716e9e8fe77f82e43a4373aa9d9ca27c, type: 3}
+  m_PrefabInstance: {fileID: 1688931624}
+  m_PrefabAsset: {fileID: 0}
+--- !u!58 &1688931626
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1688931625}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 2.56
 --- !u!1001 &1689698644
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2053,8 +2211,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1700194449}
   - component: {fileID: 1700194452}
-  - component: {fileID: 1700194451}
   - component: {fileID: 1700194450}
+  - component: {fileID: 1700194451}
   m_Layer: 3
   m_Name: Planet (3)
   m_TagString: Gravity Body
@@ -2090,8 +2248,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   anchor: {fileID: 541684181}
   speed: 10
---- !u!60 &1700194451
-PolygonCollider2D:
+--- !u!58 &1700194451
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -2104,98 +2262,8 @@ PolygonCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 5.12, y: 5.12}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 0.95, y: -2.3}
-      - {x: 1.1899999, y: -2.19}
-      - {x: 1.31, y: -2.12}
-      - {x: 1.4599999, y: -2.02}
-      - {x: 1.54, y: -1.9599999}
-      - {x: 1.66, y: -1.8499999}
-      - {x: 1.87, y: -1.64}
-      - {x: 2.03, y: -1.4599999}
-      - {x: 2.18, y: -1.2099999}
-      - {x: 2.27, y: -1.02}
-      - {x: 2.33, y: -0.88}
-      - {x: 2.3799999, y: -0.74}
-      - {x: 2.4299998, y: -0.55}
-      - {x: 2.45, y: -0.45}
-      - {x: 2.48, y: -0.24}
-      - {x: 2.49, y: -0.08}
-      - {x: 2.49, y: 0.089999996}
-      - {x: 2.48, y: 0.24}
-      - {x: 2.46, y: 0.39}
-      - {x: 2.44, y: 0.5}
-      - {x: 2.3999999, y: 0.65999997}
-      - {x: 2.37, y: 0.76}
-      - {x: 2.32, y: 0.9}
-      - {x: 2.23, y: 1.11}
-      - {x: 2.11, y: 1.3299999}
-      - {x: 2.03, y: 1.4499999}
-      - {x: 1.9699999, y: 1.53}
-      - {x: 1.8499999, y: 1.67}
-      - {x: 1.67, y: 1.8399999}
-      - {x: 1.4599999, y: 2.02}
-      - {x: 1.26, y: 2.1499999}
-      - {x: 1.02, y: 2.27}
-      - {x: 0.66999996, y: 2.4099998}
-      - {x: 0.45, y: 2.46}
-      - {x: 0.32, y: 2.47}
-      - {x: 0.22999999, y: 2.48}
-      - {x: -0.08, y: 2.49}
-      - {x: -0.24, y: 2.48}
-      - {x: -0.45, y: 2.45}
-      - {x: -0.55, y: 2.4299998}
-      - {x: -0.71, y: 2.3899999}
-      - {x: -0.85999995, y: 2.34}
-      - {x: -0.95, y: 2.3}
-      - {x: -1.26, y: 2.1499999}
-      - {x: -1.4499999, y: 2.04}
-      - {x: -1.64, y: 1.87}
-      - {x: -1.87, y: 1.65}
-      - {x: -2.03, y: 1.4499999}
-      - {x: -2.11, y: 1.3299999}
-      - {x: -2.1699998, y: 1.23}
-      - {x: -2.29, y: 0.97999996}
-      - {x: -2.34, y: 0.84999996}
-      - {x: -2.3999999, y: 0.66999996}
-      - {x: -2.4299998, y: 0.59}
-      - {x: -2.47, y: 0.31}
-      - {x: -2.48, y: 0.21}
-      - {x: -2.48, y: -0.21}
-      - {x: -2.47, y: -0.31}
-      - {x: -2.45, y: -0.44}
-      - {x: -2.4199998, y: -0.58}
-      - {x: -2.37, y: -0.77}
-      - {x: -2.29, y: -0.97999996}
-      - {x: -2.21, y: -1.16}
-      - {x: -2.11, y: -1.3299999}
-      - {x: -2.07, y: -1.39}
-      - {x: -1.9699999, y: -1.52}
-      - {x: -1.88, y: -1.63}
-      - {x: -1.63, y: -1.88}
-      - {x: -1.4499999, y: -2.03}
-      - {x: -1.3, y: -2.1299999}
-      - {x: -1.13, y: -2.22}
-      - {x: -0.97999996, y: -2.29}
-      - {x: -0.82, y: -2.35}
-      - {x: -0.53999996, y: -2.4299998}
-      - {x: -0.44, y: -2.45}
-      - {x: -0.38, y: -2.46}
-      - {x: -0.21, y: -2.48}
-      - {x: 0.22, y: -2.48}
-      - {x: 0.37, y: -2.46}
-      - {x: 0.59, y: -2.4199998}
-      - {x: 0.76, y: -2.37}
+  serializedVersion: 2
+  m_Radius: 2.56
 --- !u!212 &1700194452
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2508,6 +2576,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2294604005577745748, guid: c480e097bbf4f6249ac210e34d6e8ab3, type: 3}
+      propertyPath: m_text
+      value: ORION III
+      objectReference: {fileID: 0}
     - target: {fileID: 2294604006401946894, guid: c480e097bbf4f6249ac210e34d6e8ab3, type: 3}
       propertyPath: m_RootOrder
       value: 2

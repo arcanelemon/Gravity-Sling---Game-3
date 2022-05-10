@@ -21,7 +21,6 @@ public class Scrap : MonoBehaviour
     void Awake()
     {
         // Generate ID
-        
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -29,7 +28,6 @@ public class Scrap : MonoBehaviour
         TriggerAction();
         AudioManager.instance.Play("Scrap_Pickup");
         Destroy(gameObject);
-        
     }
 
     #endregion Engine

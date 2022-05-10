@@ -329,8 +329,8 @@ GameObject:
   m_Component:
   - component: {fileID: 486867849}
   - component: {fileID: 486867852}
-  - component: {fileID: 486867851}
   - component: {fileID: 486867850}
+  - component: {fileID: 486867851}
   m_Layer: 3
   m_Name: Planet (12)
   m_TagString: Gravity Body
@@ -366,8 +366,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   anchor: {fileID: 1615595329}
   speed: 10
---- !u!60 &486867851
-PolygonCollider2D:
+--- !u!58 &486867851
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -380,98 +380,8 @@ PolygonCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 5.12, y: 5.12}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 0.95, y: -2.3}
-      - {x: 1.1899999, y: -2.19}
-      - {x: 1.31, y: -2.12}
-      - {x: 1.4599999, y: -2.02}
-      - {x: 1.54, y: -1.9599999}
-      - {x: 1.66, y: -1.8499999}
-      - {x: 1.87, y: -1.64}
-      - {x: 2.03, y: -1.4599999}
-      - {x: 2.18, y: -1.2099999}
-      - {x: 2.27, y: -1.02}
-      - {x: 2.33, y: -0.88}
-      - {x: 2.3799999, y: -0.74}
-      - {x: 2.4299998, y: -0.55}
-      - {x: 2.45, y: -0.45}
-      - {x: 2.48, y: -0.24}
-      - {x: 2.49, y: -0.08}
-      - {x: 2.49, y: 0.089999996}
-      - {x: 2.48, y: 0.24}
-      - {x: 2.46, y: 0.39}
-      - {x: 2.44, y: 0.5}
-      - {x: 2.3999999, y: 0.65999997}
-      - {x: 2.37, y: 0.76}
-      - {x: 2.32, y: 0.9}
-      - {x: 2.23, y: 1.11}
-      - {x: 2.11, y: 1.3299999}
-      - {x: 2.03, y: 1.4499999}
-      - {x: 1.9699999, y: 1.53}
-      - {x: 1.8499999, y: 1.67}
-      - {x: 1.67, y: 1.8399999}
-      - {x: 1.4599999, y: 2.02}
-      - {x: 1.26, y: 2.1499999}
-      - {x: 1.02, y: 2.27}
-      - {x: 0.66999996, y: 2.4099998}
-      - {x: 0.45, y: 2.46}
-      - {x: 0.32, y: 2.47}
-      - {x: 0.22999999, y: 2.48}
-      - {x: -0.08, y: 2.49}
-      - {x: -0.24, y: 2.48}
-      - {x: -0.45, y: 2.45}
-      - {x: -0.55, y: 2.4299998}
-      - {x: -0.71, y: 2.3899999}
-      - {x: -0.85999995, y: 2.34}
-      - {x: -0.95, y: 2.3}
-      - {x: -1.26, y: 2.1499999}
-      - {x: -1.4499999, y: 2.04}
-      - {x: -1.64, y: 1.87}
-      - {x: -1.87, y: 1.65}
-      - {x: -2.03, y: 1.4499999}
-      - {x: -2.11, y: 1.3299999}
-      - {x: -2.1699998, y: 1.23}
-      - {x: -2.29, y: 0.97999996}
-      - {x: -2.34, y: 0.84999996}
-      - {x: -2.3999999, y: 0.66999996}
-      - {x: -2.4299998, y: 0.59}
-      - {x: -2.47, y: 0.31}
-      - {x: -2.48, y: 0.21}
-      - {x: -2.48, y: -0.21}
-      - {x: -2.47, y: -0.31}
-      - {x: -2.45, y: -0.44}
-      - {x: -2.4199998, y: -0.58}
-      - {x: -2.37, y: -0.77}
-      - {x: -2.29, y: -0.97999996}
-      - {x: -2.21, y: -1.16}
-      - {x: -2.11, y: -1.3299999}
-      - {x: -2.07, y: -1.39}
-      - {x: -1.9699999, y: -1.52}
-      - {x: -1.88, y: -1.63}
-      - {x: -1.63, y: -1.88}
-      - {x: -1.4499999, y: -2.03}
-      - {x: -1.3, y: -2.1299999}
-      - {x: -1.13, y: -2.22}
-      - {x: -0.97999996, y: -2.29}
-      - {x: -0.82, y: -2.35}
-      - {x: -0.53999996, y: -2.4299998}
-      - {x: -0.44, y: -2.45}
-      - {x: -0.38, y: -2.46}
-      - {x: -0.21, y: -2.48}
-      - {x: 0.22, y: -2.48}
-      - {x: 0.37, y: -2.46}
-      - {x: 0.59, y: -2.4199998}
-      - {x: 0.76, y: -2.37}
+  serializedVersion: 2
+  m_Radius: 2.5599997
 --- !u!212 &486867852
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -622,13 +532,35 @@ PrefabInstance:
       propertyPath: m_Name
       value: Desert_Planet
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3642099520967780184, guid: f96f47f1359f971449d0f654494c67b1, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: f96f47f1359f971449d0f654494c67b1, type: 3}
 --- !u!4 &542220151 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3642099520967780185, guid: f96f47f1359f971449d0f654494c67b1, type: 3}
   m_PrefabInstance: {fileID: 542220150}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &542220152 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3642099520967780187, guid: f96f47f1359f971449d0f654494c67b1, type: 3}
+  m_PrefabInstance: {fileID: 542220150}
+  m_PrefabAsset: {fileID: 0}
+--- !u!58 &542220153
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 542220152}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 2.56
 --- !u!1001 &632025310
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -746,13 +678,35 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rorange_Planet
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3642099520967780184, guid: 716e9e8fe77f82e43a4373aa9d9ca27c, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 716e9e8fe77f82e43a4373aa9d9ca27c, type: 3}
 --- !u!4 &697064645 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3642099520967780185, guid: 716e9e8fe77f82e43a4373aa9d9ca27c, type: 3}
   m_PrefabInstance: {fileID: 697064644}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &697064646 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3642099520967780187, guid: 716e9e8fe77f82e43a4373aa9d9ca27c, type: 3}
+  m_PrefabInstance: {fileID: 697064644}
+  m_PrefabAsset: {fileID: 0}
+--- !u!58 &697064647
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 697064646}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 2.5600007
 --- !u!1 &793894389
 GameObject:
   m_ObjectHideFlags: 0
@@ -848,13 +802,35 @@ PrefabInstance:
       propertyPath: m_Name
       value: Red_Planet
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3642099520967780184, guid: 29186f7d888081d4a9d1e1a136bba48d, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 29186f7d888081d4a9d1e1a136bba48d, type: 3}
 --- !u!4 &805561218 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3642099520967780185, guid: 29186f7d888081d4a9d1e1a136bba48d, type: 3}
   m_PrefabInstance: {fileID: 805561217}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &805561219 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3642099520967780187, guid: 29186f7d888081d4a9d1e1a136bba48d, type: 3}
+  m_PrefabInstance: {fileID: 805561217}
+  m_PrefabAsset: {fileID: 0}
+--- !u!58 &805561220
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 805561219}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 2.56
 --- !u!1001 &834141626
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -972,13 +948,35 @@ PrefabInstance:
       propertyPath: m_Name
       value: Planet
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3642099520967780184, guid: a232024bd21c1a545b232114746ff98f, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: a232024bd21c1a545b232114746ff98f, type: 3}
 --- !u!4 &929556183 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3642099520967780185, guid: a232024bd21c1a545b232114746ff98f, type: 3}
   m_PrefabInstance: {fileID: 929556182}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &929556184 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3642099520967780187, guid: a232024bd21c1a545b232114746ff98f, type: 3}
+  m_PrefabInstance: {fileID: 929556182}
+  m_PrefabAsset: {fileID: 0}
+--- !u!58 &929556185
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 929556184}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 2.56
 --- !u!1001 &959994866
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1110,6 +1108,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2294604005577745748, guid: c480e097bbf4f6249ac210e34d6e8ab3, type: 3}
+      propertyPath: m_text
+      value: ORION ii
+      objectReference: {fileID: 0}
     - target: {fileID: 2294604006401946894, guid: c480e097bbf4f6249ac210e34d6e8ab3, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -1215,8 +1217,30 @@ PrefabInstance:
       propertyPath: m_Name
       value: Planet (1)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3642099520967780184, guid: a232024bd21c1a545b232114746ff98f, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: a232024bd21c1a545b232114746ff98f, type: 3}
+--- !u!1 &1042984542 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3642099520967780187, guid: a232024bd21c1a545b232114746ff98f, type: 3}
+  m_PrefabInstance: {fileID: 1042984541}
+  m_PrefabAsset: {fileID: 0}
+--- !u!58 &1042984543
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1042984542}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 2.56
 --- !u!1 &1130991432
 GameObject:
   m_ObjectHideFlags: 0
@@ -1268,10 +1292,10 @@ MonoBehaviour:
   jumpForce: 15
   boostForce: 10
   attractForce: 150
-  attractDistance: 15
+  attractDistance: 30
   rotateSpeed: 10
-  rotateDistance: 5
-  groundCheckDistance: 0.55
+  rotateDistance: 10
+  groundCheckDistance: 0.7
   maxVelocity: 50
   gravityConst: 100
   gravityMin: 20
@@ -1845,13 +1869,35 @@ PrefabInstance:
       propertyPath: m_Name
       value: Purple_Planet
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3642099520967780184, guid: bb32cfe4b8c9c7b4593bc67e6b5246a9, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: bb32cfe4b8c9c7b4593bc67e6b5246a9, type: 3}
 --- !u!4 &1615595329 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3642099520967780185, guid: bb32cfe4b8c9c7b4593bc67e6b5246a9, type: 3}
   m_PrefabInstance: {fileID: 1615595328}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1615595330 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3642099520967780187, guid: bb32cfe4b8c9c7b4593bc67e6b5246a9, type: 3}
+  m_PrefabInstance: {fileID: 1615595328}
+  m_PrefabAsset: {fileID: 0}
+--- !u!58 &1615595331
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1615595330}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 2.56
 --- !u!1001 &1662323668
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1969,13 +2015,35 @@ PrefabInstance:
       propertyPath: m_Name
       value: Red_Planet (1)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3642099520967780184, guid: 29186f7d888081d4a9d1e1a136bba48d, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 29186f7d888081d4a9d1e1a136bba48d, type: 3}
 --- !u!4 &1737218777 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3642099520967780185, guid: 29186f7d888081d4a9d1e1a136bba48d, type: 3}
   m_PrefabInstance: {fileID: 1737218776}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1737218778 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3642099520967780187, guid: 29186f7d888081d4a9d1e1a136bba48d, type: 3}
+  m_PrefabInstance: {fileID: 1737218776}
+  m_PrefabAsset: {fileID: 0}
+--- !u!58 &1737218779
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1737218778}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 2.56
 --- !u!4 &1757382917 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3642099520967780185, guid: a232024bd21c1a545b232114746ff98f, type: 3}
@@ -2053,8 +2121,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2044988125}
   - component: {fileID: 2044988124}
-  - component: {fileID: 2044988123}
   - component: {fileID: 2044988122}
+  - component: {fileID: 2044988123}
   m_Layer: 3
   m_Name: Planet (11)
   m_TagString: Gravity Body
@@ -2076,8 +2144,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   anchor: {fileID: 1615595329}
   speed: 10
---- !u!60 &2044988123
-PolygonCollider2D:
+--- !u!58 &2044988123
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -2090,98 +2158,8 @@ PolygonCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 5.12, y: 5.12}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 0.95, y: -2.3}
-      - {x: 1.1899999, y: -2.19}
-      - {x: 1.31, y: -2.12}
-      - {x: 1.4599999, y: -2.02}
-      - {x: 1.54, y: -1.9599999}
-      - {x: 1.66, y: -1.8499999}
-      - {x: 1.87, y: -1.64}
-      - {x: 2.03, y: -1.4599999}
-      - {x: 2.18, y: -1.2099999}
-      - {x: 2.27, y: -1.02}
-      - {x: 2.33, y: -0.88}
-      - {x: 2.3799999, y: -0.74}
-      - {x: 2.4299998, y: -0.55}
-      - {x: 2.45, y: -0.45}
-      - {x: 2.48, y: -0.24}
-      - {x: 2.49, y: -0.08}
-      - {x: 2.49, y: 0.089999996}
-      - {x: 2.48, y: 0.24}
-      - {x: 2.46, y: 0.39}
-      - {x: 2.44, y: 0.5}
-      - {x: 2.3999999, y: 0.65999997}
-      - {x: 2.37, y: 0.76}
-      - {x: 2.32, y: 0.9}
-      - {x: 2.23, y: 1.11}
-      - {x: 2.11, y: 1.3299999}
-      - {x: 2.03, y: 1.4499999}
-      - {x: 1.9699999, y: 1.53}
-      - {x: 1.8499999, y: 1.67}
-      - {x: 1.67, y: 1.8399999}
-      - {x: 1.4599999, y: 2.02}
-      - {x: 1.26, y: 2.1499999}
-      - {x: 1.02, y: 2.27}
-      - {x: 0.66999996, y: 2.4099998}
-      - {x: 0.45, y: 2.46}
-      - {x: 0.32, y: 2.47}
-      - {x: 0.22999999, y: 2.48}
-      - {x: -0.08, y: 2.49}
-      - {x: -0.24, y: 2.48}
-      - {x: -0.45, y: 2.45}
-      - {x: -0.55, y: 2.4299998}
-      - {x: -0.71, y: 2.3899999}
-      - {x: -0.85999995, y: 2.34}
-      - {x: -0.95, y: 2.3}
-      - {x: -1.26, y: 2.1499999}
-      - {x: -1.4499999, y: 2.04}
-      - {x: -1.64, y: 1.87}
-      - {x: -1.87, y: 1.65}
-      - {x: -2.03, y: 1.4499999}
-      - {x: -2.11, y: 1.3299999}
-      - {x: -2.1699998, y: 1.23}
-      - {x: -2.29, y: 0.97999996}
-      - {x: -2.34, y: 0.84999996}
-      - {x: -2.3999999, y: 0.66999996}
-      - {x: -2.4299998, y: 0.59}
-      - {x: -2.47, y: 0.31}
-      - {x: -2.48, y: 0.21}
-      - {x: -2.48, y: -0.21}
-      - {x: -2.47, y: -0.31}
-      - {x: -2.45, y: -0.44}
-      - {x: -2.4199998, y: -0.58}
-      - {x: -2.37, y: -0.77}
-      - {x: -2.29, y: -0.97999996}
-      - {x: -2.21, y: -1.16}
-      - {x: -2.11, y: -1.3299999}
-      - {x: -2.07, y: -1.39}
-      - {x: -1.9699999, y: -1.52}
-      - {x: -1.88, y: -1.63}
-      - {x: -1.63, y: -1.88}
-      - {x: -1.4499999, y: -2.03}
-      - {x: -1.3, y: -2.1299999}
-      - {x: -1.13, y: -2.22}
-      - {x: -0.97999996, y: -2.29}
-      - {x: -0.82, y: -2.35}
-      - {x: -0.53999996, y: -2.4299998}
-      - {x: -0.44, y: -2.45}
-      - {x: -0.38, y: -2.46}
-      - {x: -0.21, y: -2.48}
-      - {x: 0.22, y: -2.48}
-      - {x: 0.37, y: -2.46}
-      - {x: 0.59, y: -2.4199998}
-      - {x: 0.76, y: -2.37}
+  serializedVersion: 2
+  m_Radius: 2.5599997
 --- !u!212 &2044988124
 SpriteRenderer:
   m_ObjectHideFlags: 0

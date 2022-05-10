@@ -29,17 +29,5 @@ public class Orbit : MonoBehaviour
         transform.RotateAround(anchor.position, transform.forward, speed * Time.deltaTime);
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.tag is "Player")
-            collision.gameObject.transform.SetParent(gameObject.transform, true);
-    }
-
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        if (collision.gameObject.tag is "Player")
-            collision.gameObject.transform.parent = null;
-    }
-
     #endregion Engine
 }
