@@ -16,5 +16,5 @@ MonoBehaviour:
   scrapRequirement: 1500
   planets:
   - {fileID: 11400000, guid: b451c2432ac702d41884c61a563b3efd, type: 2}
-  - {fileID: 11400000, guid: 60f11dc4943deaa4e8f3e948263320c8, type: 2}
-  - {fileID: 11400000, guid: 60f11dc4943deaa4e8f3e948263320c8, type: 2}
+  - {fileID: 11400000, guid: 64c4dce7e4b127849a7dd2f011c458b1, type: 2}
+  - {fileID: 11400000, guid: 5de7835f6e6838541a2388218cc65349, type: 2}

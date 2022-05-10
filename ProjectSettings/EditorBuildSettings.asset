@@ -9,9 +9,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Main Menu.unity
     guid: 78239c949bb149848a0c1340b0827ee6
   - enabled: 1
-    path: Assets/Scenes/Levels/1/Orion II.unity
-    guid: e36956cfbe525d946b60fe860cc43f11
-  - enabled: 1
     path: Assets/Scenes/Levels/3/Serious I.unity
     guid: 0105f331a3d120a45a30bf6b931dc5d3
   - enabled: 1
@@ -26,4 +23,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Levels/2/Scorpio II.unity
     guid: 533e92b822f943349800ad1c09675080
+  - enabled: 1
+    path: Assets/Scenes/Levels/1/Orion I.unity
+    guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/Levels/1/Orion III.unity
+    guid: 5b34f83f6ffa1ac4e975ded6c78c4991
   m_configObjects: {}
